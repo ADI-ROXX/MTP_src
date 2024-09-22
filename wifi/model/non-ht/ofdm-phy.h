@@ -134,6 +134,13 @@ class OfdmPhy : public PhyEntity
      * \return a WifiMode for OFDM at 24 Mbps
      */
     static WifiMode GetOfdmRate24Mbps();
+
+    /**
+     * Return a WifiMode for OFDM at 24 Mbps.
+     *
+     * \return a WifiMode for OFDM at 24 Mbps
+     */
+    static WifiMode GetOfdmRate27Mbps();
     /**
      * Return a WifiMode for OFDM at 36 Mbps.
      *

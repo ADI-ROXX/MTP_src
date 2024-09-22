@@ -53,7 +53,7 @@ const PhyEntity::ModulationLookupTable OfdmPhy::m_ofdmModulationLookupTable {
     { "OfdmRate9Mbps",          { WIFI_CODE_RATE_3_4, 2 } },  //  |
     { "OfdmRate12Mbps",         { WIFI_CODE_RATE_1_2, 4 } },  //  V
     { "OfdmRate18Mbps",         { WIFI_CODE_RATE_3_4, 4 } },
-    { "OfdmRate24Mbps",  { WIFI_CODE_RATE_3_4, 64 } }, //yahan par add kiya hai maine
+    { "OfdmRate27Mbps",         { WIFI_CODE_RATE_9_16, 16 } }, //yahan par add kiya hai maine
     { "OfdmRate36Mbps",         { WIFI_CODE_RATE_3_4, 16 } },
     { "OfdmRate48Mbps",         { WIFI_CODE_RATE_2_3, 64 } },
     { "OfdmRate54Mbps",         { WIFI_CODE_RATE_3_4, 64 } },
@@ -79,7 +79,7 @@ const PhyEntity::ModulationLookupTable OfdmPhy::m_ofdmModulationLookupTable {
 const std::map<uint16_t, std::array<uint64_t, 8> > s_ofdmRatesBpsList =
    {{ 20, // MHz
      {  6000000,  9000000, 12000000, 18000000,
-       24000000, 36000000, 48000000, 54000000 }}, //yahan par change kiya hai maine 24->27
+       27000000, 36000000, 48000000, 54000000 }}, //yahan par change kiya hai maine 24->27
    { 10, // MHz
      {  3000000,  4500000,  6000000,  9000000,
        12000000, 18000000, 24000000, 27000000 }},
@@ -468,6 +468,8 @@ OfdmPhy::GetOfdmRate(uint64_t rate, uint16_t bw)
             return GetOfdmRate18Mbps();
         case 24000000:
             return GetOfdmRate24Mbps();
+        case 27000000:
+            return GetOfdmRate27Mbps();
         case 36000000:
             return GetOfdmRate36Mbps();
         case 48000000:
@@ -545,7 +547,8 @@ GET_OFDM_MODE(OfdmRate6Mbps, true)
 GET_OFDM_MODE(OfdmRate9Mbps, false)
 GET_OFDM_MODE(OfdmRate12Mbps, true)
 GET_OFDM_MODE(OfdmRate18Mbps, false)
-GET_OFDM_MODE(OfdmRate24Mbps, true)
+// GET_OFDM_MODE(OfdmRate24Mbps, false)  
+GET_OFDM_MODE(OfdmRate27Mbps, false)  //yahan
 GET_OFDM_MODE(OfdmRate36Mbps, false)
 GET_OFDM_MODE(OfdmRate48Mbps, false)
 GET_OFDM_MODE(OfdmRate54Mbps, false)
