@@ -630,6 +630,8 @@ OfdmPhy::GetCodeRatio(WifiCodeRate codeRate)
         return (2.0 / 3.0);
     case WIFI_CODE_RATE_1_2:
         return (1.0 / 2.0);
+    case WIFI_CODE_RATE_9_16:    //yahan
+        return (9.0 / 16.0); 
     case WIFI_CODE_RATE_UNDEFINED:
     default:
         NS_FATAL_ERROR("trying to get code ratio for undefined coding rate");
