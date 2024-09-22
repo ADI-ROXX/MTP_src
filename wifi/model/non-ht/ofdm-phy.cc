@@ -467,8 +467,8 @@ OfdmPhy::GetOfdmRate(uint64_t rate, uint16_t bw)
             return GetOfdmRate12Mbps();
         case 18000000:
             return GetOfdmRate18Mbps();
-        case 24000000:
-            return GetOfdmRate24Mbps();
+        // case 24000000:
+        //     return GetOfdmRate24Mbps();
         case 27000000:
             return GetOfdmRate27Mbps();
         case 36000000:
