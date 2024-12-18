@@ -44,7 +44,9 @@ enum OfdmPhyVariant
 {
     OFDM_PHY_DEFAULT,
     OFDM_PHY_10_MHZ,
-    OFDM_PHY_5_MHZ
+    OFDM_PHY_5_MHZ,
+    OFDM_PHY_40_MHZ // yahan
+
 };
 
 /**
@@ -264,6 +266,18 @@ class OfdmPhy : public PhyEntity
      * \param name the unique name of the OFDM mode
      * \return WifiCodeRate corresponding to the unique name
      */
+    // Add these declarations in the public section of the class
+    static WifiMode GetOfdmRate12MbpsBW40MHz();
+    static WifiMode GetOfdmRate18MbpsBW40MHz();
+    static WifiMode GetOfdmRate24MbpsBW40MHz();
+    static WifiMode GetOfdmRate36MbpsBW40MHz();
+    static WifiMode GetOfdmRate54MbpsBW40MHz();    // Code rate 1/2, 16-QAM
+    static WifiMode GetOfdmRate60_75MbpsBW40MHz(); // Code rate 9/16, 16-QAM
+    static WifiMode GetOfdmRate72MbpsBW40MHz();
+    static WifiMode GetOfdmRate96MbpsBW40MHz();
+    static WifiMode GetOfdmRate108MbpsBW40MHz();
+
+
     static WifiCodeRate GetCodeRate(const std::string& name);
     /**
      * Return the constellation size from the OFDM mode's unique name using

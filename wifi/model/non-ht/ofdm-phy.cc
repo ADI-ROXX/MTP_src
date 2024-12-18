@@ -54,7 +54,7 @@ const PhyEntity::ModulationLookupTable OfdmPhy::m_ofdmModulationLookupTable {
     { "OfdmRate12Mbps",         { WIFI_CODE_RATE_1_2, 4 } },  //  V
     { "OfdmRate18Mbps",         { WIFI_CODE_RATE_3_4, 4 } },
     //  { "OfdmRate24Mbps",  { WIFI_CODE_RATE_3_4, 64 } }
-    { "OfdmRate27Mbps",         { WIFI_CODE_RATE_9_16, 16 } }, //yahan par add kiya hai maine
+    { "OfdmRate27Mbps",         { WIFI_CODE_RATE_9_16, 16 } },                  //yahan par add kiya hai maine
     { "OfdmRate36Mbps",         { WIFI_CODE_RATE_3_4, 16 } },
     { "OfdmRate48Mbps",         { WIFI_CODE_RATE_2_3, 64 } },
     { "OfdmRate54Mbps",         { WIFI_CODE_RATE_3_4, 64 } },
@@ -74,6 +74,15 @@ const PhyEntity::ModulationLookupTable OfdmPhy::m_ofdmModulationLookupTable {
     { "OfdmRate9MbpsBW5MHz",    { WIFI_CODE_RATE_3_4, 16 } },
     { "OfdmRate12MbpsBW5MHz",   { WIFI_CODE_RATE_2_3, 64 } },
     { "OfdmRate13_5MbpsBW5MHz", { WIFI_CODE_RATE_3_4, 64 } },
+    // Add new modes for 40 MHz bandwidth
+{ "OfdmRate12MbpsBW40MHz",   { WIFI_CODE_RATE_1_2, 2 } },  // BPSK
+{ "OfdmRate18MbpsBW40MHz",   { WIFI_CODE_RATE_3_4, 2 } },  // BPSK
+{ "OfdmRate24MbpsBW40MHz",   { WIFI_CODE_RATE_1_2, 4 } },  // QPSK
+{ "OfdmRate36MbpsBW40MHz",   { WIFI_CODE_RATE_3_4, 4 } },  // QPSK
+{ "OfdmRate54MbpsBW40MHz",   { WIFI_CODE_RATE_1_2, 16 } }, // 16-QAM, code rate 1/2
+{ "OfdmRate60_75MbpsBW40MHz",   { WIFI_CODE_RATE_9_16, 16 } }, // 16-QAM
+{ "OfdmRate96MbpsBW40MHz",   { WIFI_CODE_RATE_2_3, 64 } }, // 64-QAM
+{ "OfdmRate108MbpsBW40MHz",  { WIFI_CODE_RATE_3_4, 64 } }, // 64-QAM
 };
 
 /// OFDM rates in bits per second for each bandwidth (MHz)
@@ -87,6 +96,9 @@ const std::map<uint16_t, std::array<uint64_t, 8> > s_ofdmRatesBpsList =
    { 5, // MHz
      {  1500000,  2250000,  3000000,  4500000,
         6000000,  9000000, 12000000, 13500000 }},
+        { 40, // MHz
+  { 12000000, 18000000, 24000000, 36000000,
+    54000000, 60750000, 96000000, 108000000 }},
 };
 
 
@@ -175,6 +187,15 @@ OfdmPhy::OfdmPhy(OfdmPhyVariant variant /* = OFDM_PHY_DEFAULT */, bool buildMode
             for (const auto& rate : bwRatesMap.at(5))
             {
                 WifiMode mode = GetOfdmRate(rate, 5);
+                NS_LOG_LOGIC("Add " << mode << " to list");
+                m_modeList.emplace_back(mode);
+            }
+            break;
+        case OFDM_PHY_40_MHZ:
+            // Add this case for 40 MHz
+            for (const auto& rate : bwRatesMap.at(40))
+            {
+                WifiMode mode = GetOfdmRate(rate, 40);
                 NS_LOG_LOGIC("Add " << mode << " to list");
                 m_modeList.emplace_back(mode);
             }
@@ -530,6 +551,32 @@ OfdmPhy::GetOfdmRate(uint64_t rate, uint16_t bw)
             return WifiMode();
         }
         break;
+    case 40:
+        switch (rate)
+        {
+        case 12000000:
+            return GetOfdmRate12MbpsBW40MHz();
+        case 18000000:
+            return GetOfdmRate18MbpsBW40MHz();
+        case 24000000:
+            return GetOfdmRate24MbpsBW40MHz();
+        case 36000000:
+            return GetOfdmRate36MbpsBW40MHz();
+        case 54000000:
+            return GetOfdmRate54MbpsBW40MHz();
+        case 60750000:
+            return GetOfdmRate60_75MbpsBW40MHz();
+        case 72000000:
+            return GetOfdmRate72MbpsBW40MHz();
+        case 96000000:
+            return GetOfdmRate96MbpsBW40MHz();
+        case 108000000:
+            return GetOfdmRate108MbpsBW40MHz();
+        default:
+            NS_ABORT_MSG("Inexistent rate (" << rate << " bps) requested for 11a OFDM (40 MHz)");
+            return WifiMode();
+        }
+        break;
     default:
         NS_ABORT_MSG("Inexistent bandwidth (" << +bw << " MHz) requested for 11a OFDM");
         return WifiMode();
@@ -571,6 +618,18 @@ GET_OFDM_MODE(OfdmRate6MbpsBW5MHz, true)
 GET_OFDM_MODE(OfdmRate9MbpsBW5MHz, false)
 GET_OFDM_MODE(OfdmRate12MbpsBW5MHz, false)
 GET_OFDM_MODE(OfdmRate13_5MbpsBW5MHz, false)
+//40 MHz channel rates
+// Define the getter functions using the macro
+GET_OFDM_MODE(OfdmRate12MbpsBW40MHz, true)
+GET_OFDM_MODE(OfdmRate18MbpsBW40MHz, false)
+GET_OFDM_MODE(OfdmRate24MbpsBW40MHz, true)
+GET_OFDM_MODE(OfdmRate36MbpsBW40MHz, false)
+GET_OFDM_MODE(OfdmRate54MbpsBW40MHz, true)     // Mandatory mode
+GET_OFDM_MODE(OfdmRate60_75MbpsBW40MHz, false) // Code rate 9/16, 16-QAM
+GET_OFDM_MODE(OfdmRate72MbpsBW40MHz, false)
+GET_OFDM_MODE(OfdmRate96MbpsBW40MHz, false)
+GET_OFDM_MODE(OfdmRate108MbpsBW40MHz, false)
+
 #undef GET_OFDM_MODE
 
 WifiMode
