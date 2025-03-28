@@ -1508,7 +1508,7 @@ TcpSocketBase::ProcessEstablished(Ptr<Packet> packet, const TcpHeader& tcpHeader
             NS_LOG_WARN("Ignored ack of " << tcpHeader.GetAckNumber()
                                           << " SND.UNA = " << m_txBuffer->HeadSequence());
 
-            // TODO: RFC 5961 5.2 [Blind Data Injection Attack].[Mitigation]
+            // TO9DO: RFC 5961 5.2 [Blind Data Injection Attack].[Mitigation]
         }
         else if (tcpHeader.GetAckNumber() > m_tcb->m_highTxMark)
         {
@@ -2108,7 +2108,7 @@ TcpSocketBase::ProcessAck(const SequenceNumber32& ackNumber,
         else if (m_tcb->m_congState == TcpSocketState::CA_CWR)
         {
             m_congestionControl->PktsAcked(m_tcb, segsAcked, m_tcb->m_lastRtt);
-            // TODO: need to check behavior if marking is compounded by loss
+            // TO9DO: need to check behavior if marking is compounded by loss
             // and/or packet reordering
             if (!m_congestionControl->HasCongControl() && segsAcked >= 1)
             {
@@ -2162,7 +2162,7 @@ TcpSocketBase::ProcessAck(const SequenceNumber32& ackNumber,
                 // Recalculate the segs acked, that are from m_recover to ackNumber
                 // (which are the ones we have not passed to PktsAcked and that
                 // can increase cWnd)
-                // TODO:  check consistency for dynamic segment size
+                // TO9DO:  check consistency for dynamic segment size
                 segsAcked =
                     static_cast<uint32_t>(ackNumber - oldHeadSequence) / m_tcb->m_segmentSize;
                 m_congestionControl->PktsAcked(m_tcb, segsAcked, m_tcb->m_lastRtt);
@@ -2214,9 +2214,9 @@ TcpSocketBase::ProcessAck(const SequenceNumber32& ackNumber,
 
                 m_tcb->m_cWndInfl = m_tcb->m_cWnd;
 
-                NS_LOG_LOGIC("Congestion control called: "
-                             << " cWnd: " << m_tcb->m_cWnd << " ssTh: " << m_tcb->m_ssThresh
-                             << " segsAcked: " << segsAcked);
+                NS_LOG_LOGIC("Congestion control called: " << " cWnd: " << m_tcb->m_cWnd
+                                                           << " ssTh: " << m_tcb->m_ssThresh
+                                                           << " segsAcked: " << segsAcked);
 
                 NewAck(ackNumber, true);
             }

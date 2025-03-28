@@ -56,7 +56,7 @@ ThreeGppV2vUrbanPropagationLossModel::ThreeGppV2vUrbanPropagationLossModel()
     m_logNorVar = CreateObject<LogNormalRandomVariable>();
 
     // set a default channel condition model
-    // TODO the default ccm needs buildings, how to do this?
+    // TO9DO the default ccm needs buildings, how to do this?
     // m_channelConditionModel = CreateObject<ThreeGppRmaChannelConditionModel> ();
 }
 
@@ -82,7 +82,7 @@ ThreeGppV2vUrbanPropagationLossModel::GetLossLos(double /* distance2D */,
 double
 ThreeGppV2vUrbanPropagationLossModel::GetO2iDistance2dIn() const
 {
-    // TODO O2I car penetration loss (TR 38.901 7.4.3.2) not considered
+    // TO9DO O2I car penetration loss (TR 38.901 7.4.3.2) not considered
     NS_LOG_WARN("O2I car penetration loss not yet implemented");
     return 0;
 }

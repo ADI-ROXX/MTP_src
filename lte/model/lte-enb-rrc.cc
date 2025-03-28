@@ -1111,7 +1111,7 @@ UeManager::RecvHandoverCancel(EpcX2SapUser::HandoverCancelParams params)
 void
 UeManager::SendRrcConnectionRelease()
 {
-    // TODO implement in the 3gpp way, see Section 5.3.8 of 3GPP TS 36.331.
+    // TO9DO implement in the 3gpp way, see Section 5.3.8 of 3GPP TS 36.331.
     NS_LOG_FUNCTION(this << (uint32_t)m_rnti);
     // De-activation towards UE, it will deactivate all bearers
     LteRrcSap::RrcConnectionRelease msg;

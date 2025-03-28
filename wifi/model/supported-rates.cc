@@ -29,7 +29,7 @@ NS_LOG_COMPONENT_DEFINE("SupportedRates");
 #define BSS_MEMBERSHIP_SELECTOR_HT_PHY 127
 #define BSS_MEMBERSHIP_SELECTOR_VHT_PHY 126
 #define BSS_MEMBERSHIP_SELECTOR_HE_PHY 122
-#define BSS_MEMBERSHIP_SELECTOR_EHT_PHY 121 // TODO not defined yet as of 802.11be D1.4
+#define BSS_MEMBERSHIP_SELECTOR_EHT_PHY 121 // TO9DO not defined yet as of 802.11be D1.4
 
 SupportedRates::SupportedRates()
     : extended(this),

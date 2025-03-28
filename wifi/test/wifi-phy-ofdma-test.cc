@@ -98,7 +98,7 @@ class OfdmaTestHePhy : public HePhy
 
   private:
     uint16_t m_staId; ///< ID of the STA to which this PHY belongs to
-};                    // class OfdmaTestHePhy
+}; // class OfdmaTestHePhy
 
 OfdmaTestHePhy::OfdmaTestHePhy(uint16_t staId)
     : HePhy(),
@@ -202,7 +202,7 @@ class OfdmaSpectrumWifiPhy : public SpectrumWifiPhy
     Ptr<OfdmaTestHePhy> m_ofdmTestHePhy; ///< Pointer to HE PHY instance used for OFDMA test
     TracedCallback<uint64_t>
         m_phyTxPpduUidTrace; //!< Callback providing UID of the PPDU that is about to be transmitted
-};                           // class OfdmaSpectrumWifiPhy
+}; // class OfdmaSpectrumWifiPhy
 
 TypeId
 OfdmaSpectrumWifiPhy::GetTypeId()
@@ -2619,7 +2619,7 @@ TestMultipleHeTbPreambles::DoRun()
                             2,
                             uids);
         Simulator::Schedule(Seconds(2.5), &TestMultipleHeTbPreambles::Reset, this);
-        // TODO: verify PPDUs from second UL MU transmission are dropped
+        // TO9DO: verify PPDUs from second UL MU transmission are dropped
     }
 
     {
@@ -2663,7 +2663,7 @@ TestMultipleHeTbPreambles::DoRun()
                             2,
                             uids);
         Simulator::Schedule(Seconds(3.5), &TestMultipleHeTbPreambles::Reset, this);
-        // TODO: verify PPDUs from first UL MU transmission are dropped
+        // TO9DO: verify PPDUs from first UL MU transmission are dropped
     }
 
     {
@@ -3926,7 +3926,7 @@ TestUlOfdmaPhyTransmission::ScheduleTest(Time delay,
                         this,
                         m_phyAp,
                         expectedStateAtEnd);
-    // TODO: add checks on TX stop for STAs
+    // TO9DO: add checks on TX stop for STAs
 
     if (expectedSuccessFromSta1 + expectedFailuresFromSta1 + expectedSuccessFromSta2 +
             expectedFailuresFromSta2 >

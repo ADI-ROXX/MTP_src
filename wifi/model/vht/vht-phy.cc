@@ -317,7 +317,7 @@ VhtPhy::ProcessSig(Ptr<Event> event, PhyFieldRxStatus status, WifiPpduField fiel
 {
     NS_LOG_FUNCTION(this << *event << status << field);
     NS_ASSERT(event->GetTxVector().GetPreambleType() >= WIFI_PREAMBLE_VHT_SU);
-    // TODO see if something should be done here once MU-MIMO is supported
+    // TO9DO see if something should be done here once MU-MIMO is supported
     return status; // nothing special for VHT
 }
 

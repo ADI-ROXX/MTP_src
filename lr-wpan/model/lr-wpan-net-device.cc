@@ -449,7 +449,7 @@ LrWpanNetDevice::SendFrom(Ptr<Packet> packet,
                           uint16_t protocolNumber)
 {
     NS_ABORT_MSG("Unsupported");
-    // TODO: To support SendFrom, the MACs McpsDataRequest has to use the provided source address,
+    // TO9DO: To support SendFrom, the MACs McpsDataRequest has to use the provided source address,
     // instead of to local one.
     return false;
 }
@@ -498,7 +498,7 @@ void
 LrWpanNetDevice::McpsDataIndication(McpsDataIndicationParams params, Ptr<Packet> pkt)
 {
     NS_LOG_FUNCTION(this);
-    // TODO: Use the PromiscReceiveCallback if the MAC is in promiscuous mode.
+    // TO9DO: Use the PromiscReceiveCallback if the MAC is in promiscuous mode.
 
     if (params.m_dstAddrMode == SHORT_ADDR)
     {

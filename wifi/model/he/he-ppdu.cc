@@ -502,7 +502,7 @@ HePpdu::HeSigHeader::SetMuFlag(bool mu)
 void
 HePpdu::HeSigHeader::SetMcs(uint8_t mcs)
 {
-    // NS_ASSERT (mcs <= 11); // TODO: reactivate once EHT PHY headers are implemented
+    // NS_ASSERT (mcs <= 11); // TO9DO: reactivate once EHT PHY headers are implemented
     m_mcs = mcs;
 }
 

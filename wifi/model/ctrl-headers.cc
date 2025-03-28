@@ -2217,7 +2217,7 @@ CtrlTriggerHeader::IsValid() const
     }
 
     // check that allocated RUs do not overlap
-    // TODO This is not a problem in case of UL MU-MIMO
+    // TO9DO This is not a problem in case of UL MU-MIMO
     std::vector<HeRu::RuSpec> prevRus;
 
     for (auto& ui : m_userInfoFields)

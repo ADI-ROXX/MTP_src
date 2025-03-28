@@ -255,7 +255,7 @@ ArrayResponseTest::ArrayResponseTest(Ptr<AntennaModel> txAntElem,
                                      double txBearing,
                                      double rxBearing,
                                      double expectedGain)
-    // TODO: Create a string with the test parameters as the test case name like in
+    // TO9DO: Create a string with the test parameters as the test case name like in
     // test-uniform-planar-array ?
     : TestCase("Check that the overall array response gain has the proper trend with respect to"
                "the number of antennas and the type of single element antenna"),
@@ -415,7 +415,7 @@ OverallGainAverageTest::OverallGainAverageTest(Ptr<AntennaModel> txAntElem,
                                                uint16_t rxNumAntennas,
                                                double fc,
                                                std::string threeGppScenario)
-    // TODO: Create a string with the test parameters as the test case name like in
+    // TO9DO: Create a string with the test parameters as the test case name like in
     // test-uniform-planar-array ?
     : TestCase("Check that the overall array response gain has the proper trend with respect to"
                "the number of antennas and the type of single element antenna"),

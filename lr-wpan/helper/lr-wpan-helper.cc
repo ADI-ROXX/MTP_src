@@ -267,7 +267,7 @@ LrWpanHelper::CreateAssociatedPan(NetDeviceContainer c, uint16_t panId)
                 coordExtAddr = address64;
             }
 
-            // TODO: Change this to device->GetAddress() if GetAddress can guarantee a
+            // TO9DO: Change this to device->GetAddress() if GetAddress can guarantee a
             //  an extended address (currently only gives 48 address or 16 bits addresses)
             device->GetMac()->SetExtendedAddress(address64);
             device->SetPanAssociation(panId, coordExtAddr, coordShortAddr, address16);
@@ -301,7 +301,7 @@ LrWpanHelper::SetExtendedAddresses(NetDeviceContainer c)
 
             address64.CopyFrom(idBuf);
 
-            // TODO: Change this to device->SetAddress() if GetAddress can guarantee
+            // TO9DO: Change this to device->SetAddress() if GetAddress can guarantee
             //  to set only extended addresses
             device->GetMac()->SetExtendedAddress(address64);
 

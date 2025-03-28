@@ -342,6 +342,7 @@ class ChannelAccessManager : public Object
         Time end{0};   //!< end time
     };
 
+    //TODO - Channel access manager
     /**
      * typedef for a vector of Txops
      */

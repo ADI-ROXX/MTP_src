@@ -249,7 +249,7 @@ ChannelAccessManager::InitLastBusyStructs()
         m_lastBusyEnd[WIFI_CHANLIST_SECONDARY80] = now;
         m_lastIdle[WIFI_CHANLIST_SECONDARY80] = {now, now};
     }
-    // TODO Add conditions for new channel widths as they get supported
+    // TO9DO Add conditions for new channel widths as they get supported
 
     if (m_phy->GetStandard() >= WIFI_STANDARD_80211ax && width > 20)
     {

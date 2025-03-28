@@ -501,7 +501,7 @@ DsrRouting::Start()
                 routeCache->SetUseExtends(m_useExtends);
                 routeCache->ScheduleTimer();
                 // The call back to handle link error and send error message to appropriate nodes
-                /// TODO whether this SendRerrWhenBreaksLinkToNextHop is used or not
+                /// TO9DO whether this SendRerrWhenBreaksLinkToNextHop is used or not
                 // routeCache->SetCallback (MakeCallback
                 // (&DsrRouting::SendRerrWhenBreaksLinkToNextHop, this));
                 SetRouteCache(routeCache);
@@ -2257,11 +2257,11 @@ DsrRouting::CancelLinkPacketTimer(DsrMaintainBuffEntry& mb)
     /*
      * Here we have found the entry for send retries, so we get the value and increase it by one
      */
-    /// TODO need to think about this part
+    /// TO9DO need to think about this part
     m_linkCnt[linkKey] = 0;
     m_linkCnt.erase(linkKey);
 
-    // TODO if find the linkkey, we need to remove it
+    // TO9DO if find the linkkey, we need to remove it
 
     // Find the network acknowledgment timer
     std::map<LinkKey, Timer>::const_iterator i = m_linkAckTimer.find(linkKey);
@@ -2420,7 +2420,7 @@ DsrRouting::CancelPacketTimerNextHop(Ipv4Address nextHop, uint8_t protocol)
         {
             errorDst = source;
         }
-        /// TODO if the errorDst is not seen before
+        /// TO9DO if the errorDst is not seen before
         if (std::find(previousErrorDst.begin(), previousErrorDst.end(), destination) ==
             previousErrorDst.end())
         {
@@ -2451,7 +2451,7 @@ DsrRouting::CancelPacketTimerNextHop(Ipv4Address nextHop, uint8_t protocol)
     {
         NS_LOG_INFO("Maintenance buffer entry not found");
     }
-    /// TODO need to think about whether we need the network queue entry or not
+    /// TO9DO need to think about whether we need the network queue entry or not
 }
 
 void

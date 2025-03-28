@@ -100,7 +100,7 @@ EhtPpdu::SetTxVectorFromPhyHeaders(WifiTxVector& txVector,
     txVector.SetAggregation(m_psdus.size() > 1 || m_psdus.begin()->second->IsAggregate());
     if (!m_muUserInfos.empty())
     {
-        txVector.SetEhtPpduType(0); // FIXME set to 2 for DL MU-MIMO (non-OFDMA) transmission
+        txVector.SetEhtPpduType(0); // FIX9ME set to 2 for DL MU-MIMO (non-OFDMA) transmission
     }
     for (const auto& muUserInfo : m_muUserInfos)
     {

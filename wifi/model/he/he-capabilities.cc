@@ -142,8 +142,8 @@ HeCapabilities::GetInformationFieldSize() const
     // IEEE 802.11ax-2021 9.4.2.248 HE Capabilities element
     // Element ID Extension (1) + HE MAC Capabilities Information (6)
     // + HE PHY Capabilities Information (11) + Supported HE-MCS And NSS Set (4)
-    // TODO: Supported HE-MCS And NSS Set field has variable length (4, 8 or 12)
-    // TODO: PPE Thresholds field (optional) is not implemented
+    // TO9DO: Supported HE-MCS And NSS Set field has variable length (4, 8 or 12)
+    // TO9DO: PPE Thresholds field (optional) is not implemented
     return 22;
 }
 
@@ -157,8 +157,8 @@ HeCapabilities::SerializeInformationField(Buffer::Iterator start) const
     start.WriteHtolsbU16(GetHePhyCapabilitiesInfo2());
     start.WriteU8(GetHePhyCapabilitiesInfo3());
     start.WriteHtolsbU32(GetSupportedMcsAndNss());
-    // TODO: add another 32-bits field if 160 MHz channel is supported (variable length)
-    // TODO: optional PPE Threshold field (variable length)
+    // TO9DO: add another 32-bits field if 160 MHz channel is supported (variable length)
+    // TO9DO: optional PPE Threshold field (variable length)
 }
 
 uint16_t
@@ -174,8 +174,8 @@ HeCapabilities::DeserializeInformationField(Buffer::Iterator start, uint16_t len
     SetHeMacCapabilitiesInfo(macCapabilities1, macCapabilities2);
     SetHePhyCapabilitiesInfo(phyCapabilities1, phyCapabilities2, phyCapabilities3);
     SetSupportedMcsAndNss(mcsset);
-    // TODO: add another 32-bits field if 160 MHz channel is supported (variable length)
-    // TODO: optional PPE Threshold field (variable length)
+    // TO9DO: add another 32-bits field if 160 MHz channel is supported (variable length)
+    // TO9DO: optional PPE Threshold field (variable length)
     return length;
 }
 
@@ -436,7 +436,7 @@ HeCapabilities::SetSupportedMcsAndNss(uint16_t ctrl)
     {
         m_rxBwMap[i] = (ctrl >> (11 + i)) & 0x01;
     }
-    // TODO: MCS NSS Descriptors
+    // TO9DO: MCS NSS Descriptors
 }
 
 uint16_t
@@ -454,11 +454,11 @@ HeCapabilities::GetSupportedMcsAndNss() const
     {
         val |= (m_rxBwMap[i] & 0x01) << (11 + 1);
     }
-    // TODO: MCS NSS Descriptors
+    // TO9DO: MCS NSS Descriptors
     return val;
 }
 
-// TODO: PPE threshold
+// TO9DO: PPE threshold
 
 bool
 HeCapabilities::IsSupportedTxMcs(uint8_t mcs) const

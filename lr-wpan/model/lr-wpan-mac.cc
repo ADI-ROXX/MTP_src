@@ -343,7 +343,7 @@ LrWpanMac::McpsDataRequest(McpsDataRequestParams params, Ptr<Packet> p)
     McpsDataConfirmParams confirmParams;
     confirmParams.m_msduHandle = params.m_msduHandle;
 
-    // TODO: We need a drop trace for the case that the packet is too large or the request
+    // TO9DO: We need a drop trace for the case that the packet is too large or the request
     // parameters are maleformed.
     //       The current tx drop trace is not suitable, because packets dropped using this trace
     //       carry the mac header and footer, while packets being dropped here do not have them.
@@ -478,7 +478,7 @@ LrWpanMac::McpsDataRequest(McpsDataRequestParams params, Ptr<Packet> p)
 
     if (b1 == TX_OPTION_GTS)
     {
-        // TODO:GTS Transmission
+        // TO9DO:GTS Transmission
     }
     else if (b2 == TX_OPTION_INDIRECT)
     {
@@ -489,7 +489,7 @@ LrWpanMac::McpsDataRequest(McpsDataRequestParams params, Ptr<Packet> p)
         // A DEVICE must be tracking beacons (MLME-SYNC.request is running) before attempting
         // request data from the coordinator.
 
-        // TODO: Check if the current device is coordinator (not just pan coordinator)
+        // TO9DO: Check if the current device is coordinator (not just pan coordinator)
         //  Indirect Transmission can only be done by PAN coordinator or coordinators.
         NS_ASSERT(m_panCoor);
         p->AddHeader(macHdr);
@@ -506,7 +506,7 @@ LrWpanMac::McpsDataRequest(McpsDataRequestParams params, Ptr<Packet> p)
         NS_LOG_ERROR(this << " Indirect transmissions not currently supported");
         // Note: The current Pending transaction list should work for indirect transmissions.
         // However, this is not tested yet. For now, we block the use of indirect transmissions.
-        // TODO: Save packet in the Pending Transaction list.
+        // TO9DO: Save packet in the Pending Transaction list.
         // EnqueueInd (p);
     }
     else
@@ -612,7 +612,7 @@ LrWpanMac::MlmeScanRequest(MlmeScanRequestParams params)
     m_panDescriptorList.clear();
     m_energyDetectList.clear();
 
-    // TODO: stop beacon transmission
+    // TO9DO: stop beacon transmission
 
     // Cancel any ongoing CSMA/CA operations and set to unslotted mode for scan
     m_csmaCa->Cancel();
@@ -822,7 +822,7 @@ LrWpanMac::MlmePollRequest(MlmePollRequestParams params)
     CommandPayloadHeader macPayload(CommandPayloadHeader::DATA_REQ);
 
     Ptr<Packet> beaconPacket = Create<Packet>();
-    // TODO: complete poll request (part of indirect transmissions)
+    // TO9DO: complete poll request (part of indirect transmissions)
     NS_FATAL_ERROR(this << " Poll request currently not supported");
 }
 
@@ -848,7 +848,7 @@ LrWpanMac::MlmeSetRequest(LrWpanMacPibAttributeIdentifier id, Ptr<LrWpanMacPibAt
         confirmParams.m_status = MLMESET_INVALID_PARAMETER;
         break;
     default:
-        // TODO: Add support for setting other attributes
+        // TO9DO: Add support for setting other attributes
         confirmParams.m_status = MLMESET_UNSUPPORTED_ATTRIBUTE;
         break;
     }
@@ -1029,7 +1029,7 @@ LrWpanMac::SendDataRequestCommand()
     // b) Triggered by MLME-POLL.request.
     // c) To follow an ACK of an Association Request command and continue the associate process.
 
-    // TODO: Implementation of a) and b) will be done when Indirect transmissions are fully
+    // TO9DO: Implementation of a) and b) will be done when Indirect transmissions are fully
     // supported.
     //       for now, only case c) is considered.
 
@@ -1130,7 +1130,7 @@ LrWpanMac::EndStartRequest()
 
     if (m_startParams.m_coorRealgn) // Coordinator Realignment
     {
-        // TODO: Send realignment request command frame in CSMA/CA
+        // TO9DO: Send realignment request command frame in CSMA/CA
         NS_LOG_ERROR(this << " Coordinator realignment request not supported");
         return;
     }
@@ -1180,7 +1180,7 @@ LrWpanMac::EndStartRequest()
 
             m_csmaCa->SetSlottedCsmaCa();
 
-            // TODO: Calculate the real Final CAP slot (requires GTS implementation)
+            // TO9DO: Calculate the real Final CAP slot (requires GTS implementation)
             //  FinalCapSlot = Superframe duration slots - CFP slots.
             //  In the current implementation the value of the final cap slot is equal to
             //  the total number of possible slots in the superframe (15).
@@ -1191,7 +1191,7 @@ LrWpanMac::EndStartRequest()
             m_superframeDuration = (static_cast<uint32_t>(1 << m_macSuperframeOrder)) *
                                    lrwpan::aBaseSuperframeDuration;
 
-            // TODO: change the beacon sending according to the startTime parameter (if not PAN
+            // TO9DO: change the beacon sending according to the startTime parameter (if not PAN
             // coordinator)
 
             m_beaconEvent = Simulator::ScheduleNow(&LrWpanMac::SendOneBeacon, this);
@@ -1232,7 +1232,7 @@ LrWpanMac::EndChannelScan()
         m_macPanId = m_macPanIdScan;
         m_macPanIdScan = 0;
 
-        // TODO: restart beacon transmissions that were active before the beginning of the scan
+        // TO9DO: restart beacon transmissions that were active before the beginning of the scan
         // (i.e when a coordinator perform a scan and it was already transmitting beacons)
 
         // All channels scanned, report success
@@ -1289,7 +1289,7 @@ LrWpanMac::EndChannelEnergyScan()
         m_macPanId = m_macPanIdScan;
         m_macPanIdScan = 0;
 
-        // TODO: restart beacon transmissions that were active before the beginning of the scan
+        // TO9DO: restart beacon transmissions that were active before the beginning of the scan
         // (i.e when a coordinator perform a scan and it was already transmitting beacons)
 
         // All channels scanned, report success
@@ -1403,7 +1403,7 @@ LrWpanMac::StartCFP(SuperframeType superframeType)
                                          this,
                                          SuperframeType::OUTGOING);
     }
-    // TODO: Start transmit or receive  GTS here.
+    // TO9DO: Start transmit or receive  GTS here.
 }
 
 void
@@ -1450,7 +1450,7 @@ LrWpanMac::AwaitBeacon()
 {
     m_incSuperframeStatus = BEACON;
 
-    // TODO: If the device waits more than the expected time to receive the beacon (wait = 46
+    // TO9DO: If the device waits more than the expected time to receive the beacon (wait = 46
     // symbols for default beacon size)
     //       it should continue with the start of the incoming CAP even if it did not receive the
     //       beacon. At the moment, the start of the incoming CAP is only triggered if the beacon is
@@ -1495,7 +1495,7 @@ LrWpanMac::CheckQueue()
     // Pull a packet from the queue and start sending if we are not already sending.
     if (m_lrWpanMacState == MAC_IDLE && !m_txQueue.empty() && !m_setMacState.IsRunning())
     {
-        // TODO: this should check if the node is a coordinator and using the outcoming superframe
+        // TO9DO: this should check if the node is a coordinator and using the outcoming superframe
         // not just the PAN coordinator
         if (m_csmaCa->IsUnSlottedCsmaCa() || (m_outSuperframeStatus == CAP && m_panCoor) ||
             m_incSuperframeStatus == CAP)
@@ -1546,7 +1546,7 @@ LrWpanMac::GetGtsFields()
 {
     GtsFields gtsFields;
 
-    // TODO: Logic to populate the GTS Fields from local information here
+    // TO9DO: Logic to populate the GTS Fields from local information here
 
     return gtsFields;
 }
@@ -1556,7 +1556,7 @@ LrWpanMac::GetPendingAddrFields()
 {
     PendingAddrFields pndAddrFields;
 
-    // TODO: Logic to populate the Pending Address Fields from local information here
+    // TO9DO: Logic to populate the Pending Address Fields from local information here
     return pndAddrFields;
 }
 
@@ -1730,7 +1730,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                 NS_LOG_DEBUG("Packet to " << params.m_dstExtAddr);
             }
 
-            // TODO: Fix here, this should trigger different Indication Callbacks
+            // TO9DO: Fix here, this should trigger different Indication Callbacks
             // depending the type of frame received (data,command, beacon)
             if (!m_mcpsDataIndicationCallback.IsNull())
             {
@@ -1770,7 +1770,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                 // A broadcast message (e.g. beacons) should not be received by the device who
                 // issues it.
                 acceptFrame = (receivedMacHdr.GetShortSrcAddr() != GetShortAddress());
-                // TODO: shouldn't this be filtered by the PHY?
+                // TO9DO: shouldn't this be filtered by the PHY?
             }
 
             if (acceptFrame && (receivedMacHdr.GetDstAddrMode() == SHORT_ADDR))
@@ -1819,7 +1819,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
 
             // Check device is panCoor with association permit when receiving Association Request
             // Commands.
-            // TODO:: Simple coordinators should also be able to receive it (currently only Pan
+            // TO9DO:: Simple coordinators should also be able to receive it (currently only Pan
             // Coordinators are checked)
             if (acceptFrame && (receivedMacHdr.IsCommand() && receivedMacHdr.IsAckReq()))
             {
@@ -2008,7 +2008,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                             m_csmaCa->SetSlottedCsmaCa();
                         }
 
-                        // TODO: get Incoming frame GTS Fields here
+                        // TO9DO: get Incoming frame GTS Fields here
 
                         // Begin CAP on the current device using info from the Incoming superframe
                         NS_LOG_DEBUG("Incoming superframe Active Portion (Beacon + CAP + CFP): "
@@ -2105,7 +2105,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                             PendingAddrFields pndAddrFields;
                             pndAddrFields = receivedMacPayload.GetPndAddrFields();
 
-                            // TODO: Ignore pending data, and do not send data command request if
+                            // TO9DO: Ignore pending data, and do not send data command request if
                             // the address is in the GTS list.
                             //       If the address is not in the GTS list, then  check if the
                             //       address is in the short address pending list or in the extended
@@ -2137,7 +2137,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                     if (receivedMacPayload.GetCommandFrameType() ==
                         CommandPayloadHeader::BEACON_REQ)
                     {
-                        // TODO: check that node is any coordinator not just pan coordinator
+                        // TO9DO: check that node is any coordinator not just pan coordinator
                         if (m_csmaCa->IsUnSlottedCsmaCa() && m_panCoor)
                         {
                             SendOneBeacon();
@@ -2165,7 +2165,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                         m_ackWaitTimeout.Cancel();
                         m_macTxOkTrace(m_txPkt);
 
-                        // TODO: check  if the IFS is the correct size after ACK.
+                        // TO9DO: check  if the IFS is the correct size after ACK.
                         Time ifsWaitTime = Seconds((double)GetIfsSize() / symbolRate);
 
                         // We received an ACK to a command
@@ -2194,7 +2194,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                                 }
                                 else
                                 {
-                                    // TODO: The data must be extracted by the coordinator within
+                                    // TO9DO: The data must be extracted by the coordinator within
                                     // macResponseWaitTime on timeout, MLME-ASSOCIATE.confirm is set
                                     // with status NO_DATA, and this should trigger the cancellation
                                     // of the beacon tracking (MLME-SYNC.request  trackBeacon
@@ -2246,7 +2246,7 @@ LrWpanMac::PdDataIndication(uint32_t psduLength, Ptr<Packet> p, uint8_t lqi)
                             }
 
                             default: {
-                                // TODO: add response to other request commands (e.g. Orphan)
+                                // TO9DO: add response to other request commands (e.g. Orphan)
                                 break;
                             }
                             }
@@ -2384,7 +2384,7 @@ LrWpanMac::AckWaitTimeout()
 {
     NS_LOG_FUNCTION(this);
 
-    // TODO: If we are a PAN coordinator and this was an indirect transmission,
+    // TO9DO: If we are a PAN coordinator and this was an indirect transmission,
     //       we will not initiate a retransmission. Instead we wait for the data
     //       being extracted after a new data request command.
     if (!PrepareRetransmission())
@@ -2503,7 +2503,7 @@ LrWpanMac::PrepareRetransmission()
                 break;
             }
             default: {
-                // TODO: Specify other indications according to other commands
+                // TO9DO: Specify other indications according to other commands
                 break;
             }
             }
@@ -3061,7 +3061,7 @@ LrWpanMac::PlmeSetTRXStateConfirm(LrWpanPhyEnumeration status)
     }
     else
     {
-        // TODO: What to do when we receive an error?
+        // TO9DO: What to do when we receive an error?
         // If we want to transmit a packet, but switching the transceiver on results
         // in an error, we have to recover somehow (and start sending again).
         NS_FATAL_ERROR("Error changing transceiver state");
@@ -3138,7 +3138,7 @@ LrWpanMac::PlmeSetAttributeConfirm(LrWpanPhyEnumeration status, LrWpanPibAttribu
                 m_phy->PlmeSetTRXStateRequest(IEEE_802_15_4_PHY_RX_ON);
                 break;
             case MLMESCAN_ORPHAN:
-                // TODO: add orphan scan support
+                // TO9DO: add orphan scan support
                 NS_LOG_ERROR("Scan Type currently not supported");
                 break;
 
@@ -3379,7 +3379,7 @@ LrWpanMac::SetLrWpanMacState(LrWpanMacState macState)
                 break;
             }
             default: {
-                // TODO: Other commands(e.g. Orphan Request)
+                // TO9DO: Other commands(e.g. Orphan Request)
                 break;
             }
             }
@@ -3399,7 +3399,7 @@ LrWpanMac::SetLrWpanMacState(LrWpanMacState macState)
         }
         else
         {
-            // TODO:: specify behavior for other packets
+            // TO9DO:: specify behavior for other packets
             m_txPkt = nullptr;
             m_retransmission = 0;
             m_numCsmacaRetry = 0;

@@ -832,7 +832,7 @@ PyViz::TraceNetDevPromiscRxCsma(std::string context, Ptr<const Packet> packet)
     EthernetHeader ethernetHeader;
     NS_ABORT_IF(packet->PeekHeader(ethernetHeader) == 0);
 
-    NetDevice::PacketType packetType = NetDevice::PACKET_OTHERHOST; // FIXME
+    NetDevice::PacketType packetType = NetDevice::PACKET_OTHERHOST; // FIX9ME
 
     // Other packet types are already being received by
     // TraceNetDevRxCsma; we don't want to receive them twice.

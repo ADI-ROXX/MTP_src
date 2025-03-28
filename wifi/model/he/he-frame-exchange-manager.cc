@@ -1474,12 +1474,13 @@ HeFrameExchangeManager::GetHeTbTxVector(CtrlTriggerHeader trigger, Mac48Address 
                     << "dBm)");
     }
     v.SetTxPowerLevel(powerLevel);
-    NS_LOG_LOGIC("UL power control: "
-                 << "input {pathLoss=" << pathLossDb << "dB, reqTxPower=" << reqTxPowerDbm << "dBm}"
-                 << " output {powerLevel=" << +powerLevel << " -> "
-                 << m_phy->GetPowerDbm(powerLevel) << "dBm}"
-                 << " PHY power capa {min=" << m_phy->GetTxPowerStart() << "dBm, max="
-                 << m_phy->GetTxPowerEnd() << "dBm, levels:" << +numPowerLevels << "}");
+    NS_LOG_LOGIC("UL power control: " << "input {pathLoss=" << pathLossDb
+                                      << "dB, reqTxPower=" << reqTxPowerDbm << "dBm}"
+                                      << " output {powerLevel=" << +powerLevel << " -> "
+                                      << m_phy->GetPowerDbm(powerLevel) << "dBm}"
+                                      << " PHY power capa {min=" << m_phy->GetTxPowerStart()
+                                      << "dBm, max=" << m_phy->GetTxPowerEnd()
+                                      << "dBm, levels:" << +numPowerLevels << "}");
 
     return v;
 }
@@ -2322,7 +2323,7 @@ HeFrameExchangeManager::ReceiveMpdu(Ptr<const WifiMpdu> mpdu,
                               tag.Get());
             m_psduMap.clear();
         }
-        // TODO the PHY should not pass us a non-TB PPDU if we are waiting for a
+        // TO9DO the PHY should not pass us a non-TB PPDU if we are waiting for a
         // TB PPDU. However, processing the PHY header is done by the PHY entity
         // corresponding to the modulation class of the PPDU being received, hence
         // it is not possible to check if a valid TRIGVECTOR is stored when receiving

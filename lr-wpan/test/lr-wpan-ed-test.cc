@@ -85,8 +85,8 @@ LrWpanEdTestCase::DoRun()
     // Do energy detection for a single packet, arriving with 5 dB, 10 dB, 25 dB,
     // 40 dB, relative to RX Power / Sensitivity. This should yield 0, 0, 127,
     // and 255 as the reported energy levels.
-    // TODO: Maybe there should be a test for several interfering packets.
-    // TODO: There should be tests for signals not originating from 802.15.4
+    // TO9DO: Maybe there should be a test for several interfering packets.
+    // TO9DO: There should be tests for signals not originating from 802.15.4
     //       devices.
 
     // Test setup:

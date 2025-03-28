@@ -112,7 +112,7 @@ MsduAggregator::GetNextAmsdu(Ptr<WifiMpdu> peekedItem,
      */
     // No check required for now, as we always set the A-MSDU Supported field to 1
 
-    // TODO Add support for the Max Number Of MSDUs In A-MSDU field in the Extended
+    // TO9DO Add support for the Max Number Of MSDUs In A-MSDU field in the Extended
     // Capabilities element sent by the recipient
 
     NS_ASSERT(m_htFem);

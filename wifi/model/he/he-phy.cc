@@ -192,7 +192,7 @@ HePhy::GetTrainingDuration(const WifiTxVector& txVector,
                            uint8_t nDataLtf,
                            uint8_t nExtensionLtf /* = 0 */) const
 {
-    Time ltfDuration = MicroSeconds(8); // TODO extract from TxVector when available
+    Time ltfDuration = MicroSeconds(8); // TO9DO extract from TxVector when available
     Time stfDuration;
     if (txVector.IsUlMu())
     {

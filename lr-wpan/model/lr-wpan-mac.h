@@ -333,7 +333,7 @@ enum LrWpanMacPibAttributeIdentifier
 {
     macBeaconPayload = 0,
     macBeaconPayloadLength = 1
-    // TODO: complete other MAC pib attributes
+    // TO9DO: complete other MAC pib attributes
 };
 
 /**
@@ -345,7 +345,7 @@ struct LrWpanMacPibAttributes : public SimpleRefCount<LrWpanMacPibAttributes>
 {
     Ptr<Packet> macBeaconPayload;      //!< The contents of the beacon payload.
     uint8_t macBeaconPayloadLength{0}; //!< The length in octets of the beacon payload.
-    // TODO: complete other MAC pib attributes
+    // TO9DO: complete other MAC pib attributes
 };
 
 /**

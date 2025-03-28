@@ -98,7 +98,7 @@ class HeOperation : public WifiInformationElement
     // Basic HE-MCS and NSS Set
     uint16_t m_basicHeMcsAndNssSet; ///< basic HE MCS NSS set
 
-    // TODO: VHT Operation Information subfields not defined in the standard yet.
+    // TO9DO: VHT Operation Information subfields not defined in the standard yet.
 };
 
 /**

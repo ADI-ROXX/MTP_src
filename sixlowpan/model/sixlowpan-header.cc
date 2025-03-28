@@ -268,7 +268,7 @@ SixLowPanHc1::Serialize(Buffer::Iterator start) const
         i.WriteU8(m_nextHeader);
     }
 
-    // TODO: HC2 is not yet supported. Should be.
+    // TO9DO: HC2 is not yet supported. Should be.
     NS_ASSERT_MSG(m_hc2HeaderPresent != true, "Can not compress HC2, exiting. Very sorry.");
 }
 

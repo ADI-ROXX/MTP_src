@@ -531,7 +531,7 @@ WifiSpectrumValueHelper::CreateHeMuOfdmTxPowerSpectralDensity(uint32_t centerFre
     // Build spectrum mask
     Values::iterator vit = c->ValuesBegin();
     Bands::const_iterator bit = c->ConstBandsBegin();
-    double txPowerPerBandW = (txPowerW / (ru.second - ru.first + 1)); // FIXME: null subcarriers
+    double txPowerPerBandW = (txPowerW / (ru.second - ru.first + 1)); // FIX9ME: null subcarriers
     uint32_t numBands = c->GetSpectrumModel()->GetNumBands();
     for (size_t i = 0; i < numBands; i++, vit++, bit++)
     {
@@ -633,7 +633,7 @@ WifiSpectrumValueHelper::CreateSpectrumMaskForOfdm(
     double txPowerInnerBandMinDbm = txPowerRefDbm + minInnerBandDbr;
     double txPowerMiddleBandMinDbm = txPowerRefDbm + minOuterBandDbr;
     double txPowerOuterBandMinDbm =
-        txPowerRefDbm + lowestPointDbr; // TODO also take into account dBm/MHz constraints
+        txPowerRefDbm + lowestPointDbr; // TO9DO also take into account dBm/MHz constraints
 
     // Different widths (in number of bands)
     uint32_t outerSlopeWidth =

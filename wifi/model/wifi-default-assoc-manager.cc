@@ -217,7 +217,7 @@ WifiDefaultAssocManager::EndScanning()
                     phy->ResumeFromSleep();
                 }
                 // switch this link to using the channel used by a reported AP
-                // TODO check if the STA only supports a narrower channel width
+                // TO9DO check if the STA only supports a narrower channel width
                 NS_LOG_DEBUG("Switch link "
                              << +linkId << " to using channel " << +apChannel.GetNumber()
                              << " in band " << apChannel.GetPhyBand() << " frequency "

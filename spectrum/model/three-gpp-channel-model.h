@@ -169,7 +169,7 @@ class ThreeGppChannelModel : public MatrixBasedChannelModel
             m_losCondition; //!< contains the information about the LOS state of the channel
         ChannelCondition::O2iConditionValue
             m_o2iCondition; //!< contains the information about the O2I state of the channel
-        // TODO these are not currently used, they have to be correctly set when including the
+        // TO9DO these are not currently used, they have to be correctly set when including the
         // spatial consistent update procedure
         /*The following parameters are stored for spatial consistent updating. The notation is
         that of 3GPP technical reports, but it can apply also to other channel realizations*/

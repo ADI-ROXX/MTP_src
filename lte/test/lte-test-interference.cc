@@ -69,7 +69,7 @@ LteInterferenceTestSuite::LteInterferenceTestSuite()
 {
     // these two first test cases have a spectral efficiency that corresponds to CQI=0 (out of
     // range)
-    // TODO: update the test conditions to handle out-of-range correctly
+    // TO9DO: update the test conditions to handle out-of-range correctly
     // AddTestCase (new LteInterferenceTestCase ("d1=50, d2=10",  50.000000, 10.000000,  0.040000,
     // 0.040000,  0.010399, 0.010399, 0, 0), TestCase::QUICK); AddTestCase (new
     // LteInterferenceTestCase ("d1=50, d2=20",  50.000000, 20.000000,  0.160000, 0.159998,

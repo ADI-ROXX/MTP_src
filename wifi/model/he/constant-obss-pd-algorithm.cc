@@ -89,7 +89,7 @@ ConstantObssPdAlgorithm::ReceiveHeSigA(HeSigAParameters params)
         NS_LOG_DEBUG("Received BSS color is 0");
         return;
     }
-    // TODO: SRP_AND_NON-SRG_OBSS-PD_PROHIBITED=1 => OBSS_PD SR is not allowed
+    // TO9DO: SRP_AND_NON-SRG_OBSS-PD_PROHIBITED=1 => OBSS_PD SR is not allowed
 
     bool isObss = (bssColor != params.bssColor);
     if (isObss)

@@ -306,7 +306,7 @@ FlowMonitor::ReportDrop(Ptr<FlowProbe> probe,
     if (tracked != m_trackedPackets.end())
     {
         // we don't need to track this packet anymore
-        // FIXME: this will not necessarily be true with broadcast/multicast
+        // FIX9ME: this will not necessarily be true with broadcast/multicast
         NS_LOG_DEBUG("ReportDrop: removing tracked packet (flowId=" << flowId << ", packetId="
                                                                     << packetId << ").");
         m_trackedPackets.erase(tracked);

@@ -694,7 +694,7 @@ DsrOptionRreq::Process(Ptr<Packet> packet,
             {
                 NS_LOG_DEBUG("These two nodes are neighbors");
                 m_finalRoute.clear();
-                /// TODO has changed the srcAddress to source, should not matter either way, check
+                /// TO9DO has changed the srcAddress to source, should not matter either way, check
                 /// later
                 m_finalRoute.push_back(source);      // push back the request originator's address
                 m_finalRoute.push_back(ipv4Address); // push back our own address
@@ -775,8 +775,7 @@ DsrOptionRreq::Process(Ptr<Packet> packet,
                     DsrOptionSRHeader sourceRoute;
                     NS_LOG_DEBUG("The route length " << m_finalRoute.size());
                     sourceRoute.SetNodesAddress(m_finalRoute);
-
-                    /// TODO !!!!!!!!!!!!!!
+                    /// TO9DO jep!!!!!!!!!!!!!!
                     /// Think about this part, we just added the route,
                     /// probability no need to increase stability now?????
                     // if (dsr->IsLinkCache ())

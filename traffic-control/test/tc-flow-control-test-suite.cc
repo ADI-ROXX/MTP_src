@@ -297,7 +297,7 @@ TcFlowControlTestCase::DoRun()
     }
     else
     {
-        // TODO: Make this test parametric as well, and add new test cases
+        // TO9DO: Make this test parametric as well, and add new test cases
         /*
          * When the device queue is in byte mode, all the packets enqueued in the
          * queue disc are correctly transmitted, even if the device queue is stopped
@@ -513,7 +513,7 @@ static class TcFlowControlTestSuite : public TestSuite
         AddTestCase(new TcFlowControlTestCase(QueueSizeUnit::PACKETS, 2, 1), TestCase::QUICK);
         AddTestCase(new TcFlowControlTestCase(QueueSizeUnit::PACKETS, 5, 1), TestCase::QUICK);
 
-        // TODO: Right now, this test only works for 5000B and 10 packets (it's hard coded). Should
+        // TO9DO: Right now, this test only works for 5000B and 10 packets (it's hard coded). Should
         // also be made parametric.
         AddTestCase(new TcFlowControlTestCase(QueueSizeUnit::BYTES, 5000, 10), TestCase::QUICK);
     }

@@ -49,7 +49,7 @@ static const int CqaType0AllocationRbg[4] = {
     26,  // RGB size 2
     63,  // RGB size 3
     110, // RGB size 4
-};       // see table 7.1.6.1-1 of 36.213
+}; // see table 7.1.6.1-1 of 36.213
 
 NS_OBJECT_ENSURE_REGISTERED(CqaFfMacScheduler);
 
@@ -1317,7 +1317,7 @@ CqaFfMacScheduler::DoSchedDlTriggerReq(
                     sum += sbCqi;
                 }
             } // end if cqi
-        }     // end of rbgNum
+        } // end of rbgNum
 
         sbCqiSum.insert(std::pair<uint16_t, uint8_t>((*itrbr).first.m_rnti, sum));
     }
@@ -1595,7 +1595,7 @@ CqaFfMacScheduler::DoSchedDlTriggerReq(
             }
 
         } // while there are more users in current group
-    }     // while there are more groups of users
+    } // while there are more groups of users
 
     // reset TTI stats of users
     std::map<uint16_t, CqasFlowPerf_t>::iterator itStats;
@@ -1754,8 +1754,8 @@ CqaFfMacScheduler::DoSchedDlTriggerReq(
         }
 
         itMap++;
-    }                               // end while allocation
-    ret.m_nrOfPdcchOfdmSymbols = 1; // TODO: check correct value according the DCIs txed
+    } // end while allocation
+    ret.m_nrOfPdcchOfdmSymbols = 1; // TO9DO: check correct value according the DCIs txed
 
     // update UEs stats
     NS_LOG_INFO(this << " Update UEs statistics");

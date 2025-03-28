@@ -221,9 +221,9 @@ typedef uint8_t WifiInformationElementId;
 #define IE_OPERATING_MODE_NOTIFICATION ((WifiInformationElementId)199)
 #define IE_UPSIM ((WifiInformationElementId)200)
 #define IE_REDUCED_NEIGHBOR_REPORT ((WifiInformationElementId)201)
-// TODO Add 202 to 220. See Table 9-92 of 802.11-2020
+// TO9DO Add 202 to 220. See Table 9-92 of 802.11-2020
 #define IE_VENDOR_SPECIFIC ((WifiInformationElementId)221)
-// TODO Add 222 to 241. See Table 9-92 of 802.11-2020
+// TO9DO Add 222 to 241. See Table 9-92 of 802.11-2020
 #define IE_FRAGMENT ((WifiInformationElementId)242)
 // 243 to 254 are reserved
 #define IE_EXTENSION ((WifiInformationElementId)255)

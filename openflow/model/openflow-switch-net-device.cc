@@ -1219,7 +1219,7 @@ OpenFlowSwitchNetDevice::ReceivePacketOut(const void* msg)
 
     if (ntohl(opo->buffer_id) == (uint32_t)-1)
     {
-        // FIXME: can we avoid copying data here?
+        // FIX9ME: can we avoid copying data here?
         int data_len = ntohs(opo->header.length) - sizeof *opo - actions_len;
         buffer = ofpbuf_new(data_len);
         ofpbuf_put(buffer, (uint8_t*)opo->actions + actions_len, data_len);

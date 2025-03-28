@@ -29,7 +29,7 @@ using namespace ns3;
 
 NS_LOG_COMPONENT_DEFINE("WScalingTestSuite");
 
-// TODO: Check the buffer size and scaling option value
+// TO9DO: Check the buffer size and scaling option value
 /**
  * \ingroup internet-test
  *

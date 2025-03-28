@@ -324,7 +324,7 @@ LrWpanSlottedCsmacaTestCase::DoRun()
     //     | 2 CCA |  TurnAround(Rx->Tx)| Data   |  TurnAround(Tx->Rx)    |  IFS |
     //     +-------+--------------------+--------+------------------------+------+
 
-    // TODO: This test need some rework to make it more clear
+    // TO9DO: This test need some rework to make it more clear
 
     transactionTime = Seconds((double)(m_transCost - (ifsSize + 12)) / symbolRate);
     NS_LOG_UNCOND("Transmission start time(On a boundary): " << m_apBoundary.As(Time::S));

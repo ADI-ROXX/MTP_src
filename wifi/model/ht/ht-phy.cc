@@ -287,7 +287,7 @@ HtPhy::GetPayloadDuration(uint32_t size,
     uint8_t stbc = txVector.IsStbc() ? 2 : 1; // corresponding to m_STBC in Nsym computation (see
                                               // IEEE 802.11-2016, equations (19-32) and (21-62))
     uint8_t nes = GetNumberBccEncoders(txVector);
-    // TODO: Update station managers to consider GI capabilities
+    // TO9DO: Update station managers to consider GI capabilities
     Time symbolDuration = GetSymbolDuration(txVector);
 
     double numDataBitsPerSymbol =

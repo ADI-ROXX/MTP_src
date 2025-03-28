@@ -729,7 +729,7 @@ EhtCapabilities::DeserializeInformationField(Buffer::Iterator start, uint16_t le
 std::ostream&
 operator<<(std::ostream& os, const EhtCapabilities& ehtCapabilities)
 {
-    // TODO
+    // TO9DO
     return os;
 }
 

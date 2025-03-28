@@ -351,7 +351,7 @@ StaWifiMac::GetMultiLinkElement(bool isReassoc, uint8_t linkId) const
     // and the EML Capabilities subfields, and shall not include the Link ID Info, the BSS
     // Parameters Change Count, and the Medium Synchronization Delay Information subfields
     // (Sec. 35.3.5.4 of 802.11be D2.0)
-    // TODO Add the MLD Capabilities and Operations and the EML Capabilities subfields
+    // TO9DO Add the MLD Capabilities and Operations and the EML Capabilities subfields
     multiLinkElement.SetMldMacAddress(GetAddress());
     // For each requested link in addition to the link on which the (Re)Association Request
     // frame is transmitted, the Link Info field of the Basic Multi-Link element carried
@@ -1289,7 +1289,7 @@ StaWifiMac::UpdateApInfo(const MgtFrameType& frame,
                                                                               *htCapabilities);
             }
         }
-        // TODO: process ExtendedCapabilities
+        // TO9DO: process ExtendedCapabilities
         // ExtendedCapabilities extendedCapabilities = frame.GetExtendedCapabilities ();
 
         // we do not return if VHT is not supported because HE STAs operating in
@@ -1369,7 +1369,7 @@ StaWifiMac::UpdateApInfo(const MgtFrameType& frame,
         }
         /* EHT station */
         const auto& ehtCapabilities = frame.GetEhtCapabilities();
-        // TODO: once we support non constant rate managers, we should add checks here whether EHT
+        // TO9DO: once we support non constant rate managers, we should add checks here whether EHT
         // is supported by the peer
         GetWifiRemoteStationManager(linkId)->AddStationEhtCapabilities(apAddr, *ehtCapabilities);
     };

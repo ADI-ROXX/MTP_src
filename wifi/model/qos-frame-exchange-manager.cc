@@ -162,7 +162,7 @@ QosFrameExchangeManager::StartTransmission(Ptr<Txop> edca, uint16_t allowedWidth
         CancelPifsRecovery();
     }
 
-    // TODO This will become an assert once no Txop is installed on a QoS station
+    // TO9DO This will become an assert once no Txop is installed on a QoS station
     if (!edca->IsQosTxop())
     {
         m_edca = nullptr;
@@ -464,7 +464,7 @@ QosFrameExchangeManager::GetFrameDurationId(const WifiMacHeader& header,
 {
     NS_LOG_FUNCTION(this << header << size << &txParams << fragmentedPacket);
 
-    // TODO This will be removed once no Txop is installed on a QoS station
+    // TO9DO This will be removed once no Txop is installed on a QoS station
     if (!m_edca)
     {
         return FrameExchangeManager::GetFrameDurationId(header, size, txParams, fragmentedPacket);
@@ -494,7 +494,7 @@ QosFrameExchangeManager::GetRtsDurationId(const WifiTxVector& rtsTxVector,
 {
     NS_LOG_FUNCTION(this << rtsTxVector << txDuration << response);
 
-    // TODO This will be removed once no Txop is installed on a QoS station
+    // TO9DO This will be removed once no Txop is installed on a QoS station
     if (!m_edca)
     {
         return FrameExchangeManager::GetRtsDurationId(rtsTxVector, txDuration, response);
@@ -521,7 +521,7 @@ QosFrameExchangeManager::GetCtsToSelfDurationId(const WifiTxVector& ctsTxVector,
 {
     NS_LOG_FUNCTION(this << ctsTxVector << txDuration << response);
 
-    // TODO This will be removed once no Txop is installed on a QoS station
+    // TO9DO This will be removed once no Txop is installed on a QoS station
     if (!m_edca)
     {
         return FrameExchangeManager::GetCtsToSelfDurationId(ctsTxVector, txDuration, response);
@@ -563,7 +563,7 @@ QosFrameExchangeManager::TransmissionSucceeded()
 {
     NS_LOG_DEBUG(this);
 
-    // TODO This will be removed once no Txop is installed on a QoS station
+    // TO9DO This will be removed once no Txop is installed on a QoS station
     if (!m_edca)
     {
         FrameExchangeManager::TransmissionSucceeded();
@@ -593,7 +593,7 @@ QosFrameExchangeManager::TransmissionFailed()
 {
     NS_LOG_FUNCTION(this);
 
-    // TODO This will be removed once no Txop is installed on a QoS station
+    // TO9DO This will be removed once no Txop is installed on a QoS station
     if (!m_edca)
     {
         FrameExchangeManager::TransmissionFailed();

@@ -25,7 +25,7 @@ namespace ns3
 
 NS_OBJECT_ENSURE_REGISTERED(LrWpanMacHeader);
 
-// TODO: Test Compressed PAN Id, Security Enabled, different size Key
+// TO9DO: Test Compressed PAN Id, Security Enabled, different size Key
 
 LrWpanMacHeader::LrWpanMacHeader()
 {

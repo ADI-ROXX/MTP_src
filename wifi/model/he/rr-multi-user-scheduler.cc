@@ -256,7 +256,7 @@ RrMultiUserScheduler::GetTxVectorForUlMu(Func canbeSolicited)
                 txVector.SetPreambleType(WIFI_PREAMBLE_EHT_TB);
                 txVector.SetEhtPpduType(0);
             }
-            // TODO otherwise, make sure the TX width does not exceed 160 MHz
+            // TO9DO otherwise, make sure the TX width does not exceed 160 MHz
         }
 
         // prepare the MAC header of a frame that would be sent to the candidate station,
@@ -745,7 +745,7 @@ RrMultiUserScheduler::TrySendingDlMuPpdu()
                 m_txParams.m_txVector.SetPreambleType(WIFI_PREAMBLE_EHT_MU);
                 m_txParams.m_txVector.SetEhtPpduType(0); // indicates DL OFDMA transmission
             }
-            // TODO otherwise, make sure the TX width does not exceed 160 MHz
+            // TO9DO otherwise, make sure the TX width does not exceed 160 MHz
         }
 
         // move to the next station in the list

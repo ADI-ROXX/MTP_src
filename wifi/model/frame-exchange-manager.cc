@@ -34,6 +34,7 @@
 // Time (in nanoseconds) to be added to the PSDU duration to yield the duration
 // of the timer that is started when the PHY indicates the start of the reception
 // of a frame and we are waiting for a response.
+//REVIEW - See this safeguard interval
 #define PSDU_DURATION_SAFEGUARD 400
 
 namespace ns3
@@ -294,6 +295,7 @@ FrameExchangeManager::RxStartIndication(WifiTxVector txVector, Time psduDuration
     }
 }
 
+//TODO - Start Transmission
 bool
 FrameExchangeManager::StartTransmission(Ptr<Txop> dcf, uint16_t allowedWidth)
 {
@@ -351,7 +353,6 @@ FrameExchangeManager::StartTransmission(Ptr<Txop> dcf, uint16_t allowedWidth)
     txParams.m_acknowledgment = m_ackManager->TryAddMpdu(mpdu, txParams);
     txParams.AddMpdu(mpdu);
     UpdateTxDuration(mpdu->GetHeader().GetAddr1(), txParams);
-
     SendMpduWithProtection(mpdu, txParams);
 
     return true;
@@ -436,6 +437,7 @@ FrameExchangeManager::SendMpduWithProtection(Ptr<WifiMpdu> mpdu, WifiTxParameter
     }
 }
 
+//TODO - SendMpdu
 void
 FrameExchangeManager::SendMpdu()
 {

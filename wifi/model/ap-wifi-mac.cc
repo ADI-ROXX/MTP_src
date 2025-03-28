@@ -1796,7 +1796,7 @@ ApWifiMac::ReceiveAssocRequest(const AssocReqRefVariant& assoc,
         {
             // check whether the EHT STA supports all MCSs in Basic MCS Set
             //  const auto& ehtCapabilities = frame.GetEhtCapabilities ();
-            // TODO: to be completed
+            // TO9DO: to be completed
         }
 
         // The association request from the station can be accepted.
@@ -1823,7 +1823,7 @@ ApWifiMac::ReceiveAssocRequest(const AssocReqRefVariant& assoc,
                 remoteStationManager->AddStationHtCapabilities(from, *htCapabilities);
             }
             // const ExtendedCapabilities& extendedCapabilities = frame.GetExtendedCapabilities ();
-            // TODO: to be completed
+            // TO9DO: to be completed
         }
         if (GetVhtSupported(linkId))
         {
@@ -1868,7 +1868,7 @@ ApWifiMac::ReceiveAssocRequest(const AssocReqRefVariant& assoc,
             }
             for (const auto& mcs : phy->GetMcsList(WIFI_MOD_CLASS_EHT))
             {
-                // TODO: Add check whether MCS is supported from the capabilities
+                // TO9DO: Add check whether MCS is supported from the capabilities
                 remoteStationManager->AddSupportedMcs(from, mcs);
                 // here should add a control to add basic MCS when it is implemented
             }

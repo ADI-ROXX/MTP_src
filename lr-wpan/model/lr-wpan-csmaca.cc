@@ -52,7 +52,7 @@ LrWpanCsmaCa::GetTypeId()
 
 LrWpanCsmaCa::LrWpanCsmaCa()
 {
-    // TODO-- make these into ns-3 attributes
+    // TO9DO-- make these into ns-3 attributes
 
     m_isSlotted = false;
     m_NB = 0;
@@ -231,7 +231,7 @@ LrWpanCsmaCa::Start()
     m_NB = 0;
     if (IsSlottedCsmaCa())
     {
-        // TODO: Check if the current PHY is using the Japanese band 950 Mhz:
+        // TO9DO: Check if the current PHY is using the Japanese band 950 Mhz:
         //       (IEEE_802_15_4_950MHZ_BPSK and IEEE_802_15_4_950MHZ_2GFSK)
         //       if in use, m_CW = 1.
         //       Currently 950 Mhz band PHYs are not supported in ns-3.
@@ -383,7 +383,7 @@ LrWpanCsmaCa::CanProceed()
     symbolRate = (uint64_t)m_mac->GetPhy()->GetDataOrSymbolRate(false);
     timeLeftInCap = GetTimeLeftInCap();
 
-    // TODO: On the 950 Mhz Band (Japanese Band)
+    // TO9DO: On the 950 Mhz Band (Japanese Band)
     //       only a single CCA check is performed;
     //       the CCA check duration time is:
     //

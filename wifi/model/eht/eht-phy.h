@@ -34,7 +34,7 @@ namespace ns3
 /**
  * This defines the BSS membership value for EHT PHY.
  */
-#define EHT_PHY 121 // FIXME: not defined yet as of 802.11be D1.5
+#define EHT_PHY 121 // FIX9ME: not defined yet as of 802.11be D1.5
 
 /**
  * \brief PHY entity for EHT (11be)
@@ -289,7 +289,7 @@ class EhtPhy : public HePhy
     static uint64_t CalculateNonHtReferenceRate(WifiCodeRate codeRate, uint16_t constellationSize);
 
     static const PpduFormats m_ehtPpduFormats; //!< EHT PPDU formats
-};                                             // class EhtPhy
+}; // class EhtPhy
 
 } // namespace ns3
 

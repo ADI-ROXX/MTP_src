@@ -283,7 +283,7 @@ MgtProbeRequestHeader::Deserialize(Buffer::Iterator start)
     i = WifiInformationElement::DeserializeIfPresent(m_vhtCapability, i);
     i = WifiInformationElement::DeserializeIfPresent(m_heCapability, i);
     const bool is2_4Ghz = m_rates.IsSupportedRate(
-        1000000 /* 1 Mbit/s */); // TODO: use presence of VHT capabilities IE and HE 6 GHz Band
+        1000000 /* 1 Mbit/s */); // TO9DO: use presence of VHT capabilities IE and HE 6 GHz Band
                                  // Capabilities IE once the later is implemented
     i = WifiInformationElement::DeserializeIfPresent(m_ehtCapability, i, is2_4Ghz, m_heCapability);
     return i.GetDistanceFrom(start);
@@ -885,7 +885,7 @@ MgtProbeResponseHeader::Deserialize(Buffer::Iterator start)
     i = WifiInformationElement::DeserializeIfPresent(m_muEdcaParameterSet, i);
     i = WifiInformationElement::DeserializeIfPresent(m_multiLinkElement, i, WIFI_MAC_MGT_BEACON);
     const bool is2_4Ghz = m_rates.IsSupportedRate(
-        1000000 /* 1 Mbit/s */); // TODO: use presence of VHT capabilities IE and HE 6 GHz Band
+        1000000 /* 1 Mbit/s */); // TO9DO: use presence of VHT capabilities IE and HE 6 GHz Band
                                  // Capabilities IE once the later is implemented
     i = WifiInformationElement::DeserializeIfPresent(m_ehtCapability, i, is2_4Ghz, m_heCapability);
     i = WifiInformationElement::DeserializeIfPresent(m_ehtOperation, i);
@@ -1237,7 +1237,7 @@ MgtAssocRequestHeader::Deserialize(Buffer::Iterator start)
                                                      i,
                                                      WIFI_MAC_MGT_ASSOCIATION_REQUEST);
     const bool is2_4Ghz = m_rates.IsSupportedRate(
-        1000000 /* 1 Mbit/s */); // TODO: use presence of VHT capabilities IE and HE 6 GHz Band
+        1000000 /* 1 Mbit/s */); // TO9DO: use presence of VHT capabilities IE and HE 6 GHz Band
                                  // Capabilities IE once the later is implemented
     i = WifiInformationElement::DeserializeIfPresent(m_ehtCapability, i, is2_4Ghz, m_heCapability);
     return i.GetDistanceFrom(start);
@@ -1580,7 +1580,7 @@ MgtReassocRequestHeader::Deserialize(Buffer::Iterator start)
                                                      i,
                                                      WIFI_MAC_MGT_REASSOCIATION_REQUEST);
     const bool is2_4Ghz = m_rates.IsSupportedRate(
-        1000000 /* 1 Mbit/s */); // TODO: use presence of VHT capabilities IE and HE 6 GHz Band
+        1000000 /* 1 Mbit/s */); // TO9DO: use presence of VHT capabilities IE and HE 6 GHz Band
                                  // Capabilities IE once the later is implemented
     i = WifiInformationElement::DeserializeIfPresent(m_ehtCapability, i, is2_4Ghz, m_heCapability);
     return i.GetDistanceFrom(start);
@@ -2116,7 +2116,7 @@ MgtAssocResponseHeader::Deserialize(Buffer::Iterator start)
                                                      i,
                                                      WIFI_MAC_MGT_ASSOCIATION_RESPONSE);
     const bool is2_4Ghz = m_rates.IsSupportedRate(
-        1000000 /* 1 Mbit/s */); // TODO: use presence of VHT capabilities IE and HE 6 GHz Band
+        1000000 /* 1 Mbit/s */); // TO9DO: use presence of VHT capabilities IE and HE 6 GHz Band
                                  // Capabilities IE once the later is implemented
     i = WifiInformationElement::DeserializeIfPresent(m_ehtCapability, i, is2_4Ghz, m_heCapability);
     i = WifiInformationElement::DeserializeIfPresent(m_ehtOperation, i);
@@ -2810,7 +2810,7 @@ MgtAddBaRequestHeader::GetParameterSet() const
 void
 MgtAddBaRequestHeader::SetParameterSet(uint16_t params)
 {
-    m_amsduSupport = (params)&0x01;
+    m_amsduSupport = (params) & 0x01;
     m_policy = (params >> 1) & 0x01;
     m_tid = (params >> 2) & 0x0f;
     m_bufferSize = (params >> 6) & 0x03ff;
@@ -2976,7 +2976,7 @@ MgtAddBaResponseHeader::GetParameterSet() const
 void
 MgtAddBaResponseHeader::SetParameterSet(uint16_t params)
 {
-    m_amsduSupport = (params)&0x01;
+    m_amsduSupport = (params) & 0x01;
     m_policy = (params >> 1) & 0x01;
     m_tid = (params >> 2) & 0x0f;
     m_bufferSize = (params >> 6) & 0x03ff;

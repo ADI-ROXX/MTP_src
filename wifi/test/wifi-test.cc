@@ -2525,7 +2525,7 @@ Bug2470TestCase::DoRun()
             "Incorrect number of times the ADDBA state machine was in reset state on subtest 2");
     }
 
-    // TODO: In the second test set, it does not go to reset state since ADDBA response is received
+    // TO9DO: In the second test set, it does not go to reset state since ADDBA response is received
     // after timeout (NO_REPLY) but before it does not enter RESET state. More tests should be
     // written to verify all possible scenarios.
 }

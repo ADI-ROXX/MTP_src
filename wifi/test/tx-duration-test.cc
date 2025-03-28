@@ -1762,8 +1762,8 @@ PhyHeaderSectionsTest::DoRun()
 
     // ==================================================================================
     // 11be (EHT)
-    sections.erase(WIFI_PPDU_FIELD_SIG_A); // FIXME: do we keep using separate type for 11be?
-    sections.erase(WIFI_PPDU_FIELD_SIG_B); // FIXME: do we keep using separate type for 11be?
+    sections.erase(WIFI_PPDU_FIELD_SIG_A); // FIX9ME: do we keep using separate type for 11be?
+    sections.erase(WIFI_PPDU_FIELD_SIG_B); // FIX9ME: do we keep using separate type for 11be?
     phyEntity = Create<EhtPhy>();
     txVector.SetChannelWidth(20);
     txVector.SetNss(2); // EHT-LTF duration assumed to be always 8 us for the time being (see note

@@ -4558,7 +4558,7 @@ TestUnsupportedBandwidthReception::DoRun()
                         std::nullopt,
                         heSigAExpectedRxTime);
 
-    // TODO: this test can be extended with other scenarios
+    // TO9DO: this test can be extended with other scenarios
 
     Simulator::Run();
     Simulator::Destroy();

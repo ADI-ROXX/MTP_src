@@ -660,7 +660,7 @@ LrWpanPhy::PdDataRequest(const uint32_t psduLength, Ptr<Packet> p)
     }
     else
     {
-        // TODO: This error code is not covered by the standard.
+        // TO9DO: This error code is not covered by the standard.
         // What is the correct behavior in this case?
         if (!m_pdDataConfirmCallback.IsNull())
         {
@@ -932,7 +932,7 @@ LrWpanPhy::PlmeSetTRXStateRequest(LrWpanPhyEnumeration state)
         if (m_trxState == IEEE_802_15_4_PHY_TX_ON || m_trxState == IEEE_802_15_4_PHY_TRX_OFF)
         {
             // Turnaround delay
-            // TODO: Does it really take aTurnaroundTime to switch the transceiver state,
+            // TO9DO: Does it really take aTurnaroundTime to switch the transceiver state,
             //       even when the transmitter is not busy? (6.9.1)
             m_trxStatePending = IEEE_802_15_4_PHY_RX_ON;
 
@@ -977,7 +977,7 @@ LrWpanPhy::PageSupported(uint8_t page)
     NS_LOG_FUNCTION(this << +page);
     bool retValue = false;
 
-    // TODO: Only O-QPSK 2.4GHz is supported in the LrWpanSpectrumModel
+    // TO9DO: Only O-QPSK 2.4GHz is supported in the LrWpanSpectrumModel
     //       we must limit the page until support for other modulation is added to the spectrum
     //       model.
     //
@@ -1013,7 +1013,7 @@ LrWpanPhy::PlmeSetAttributeRequest(LrWpanPibAttributeIdentifier id,
         {
             // Cancel a pending transceiver state change.
             // Switch off the transceiver.
-            // TODO: Is switching off the transceiver the right choice?
+            // TO9DO: Is switching off the transceiver the right choice?
             m_trxState = IEEE_802_15_4_PHY_TRX_OFF;
             if (m_trxStatePending != IEEE_802_15_4_PHY_IDLE)
             {
@@ -1166,7 +1166,7 @@ LrWpanPhy::PlmeSetAttributeRequest(LrWpanPibAttributeIdentifier id,
 
             m_phyPIBAttributes.phyCurrentPage = attribute->phyCurrentPage;
 
-            // TODO: Set the maximum possible sensitivity by default.
+            // TO9DO: Set the maximum possible sensitivity by default.
             //       This maximum sensitivity depends on the modulation used.
             //       Currently Only O-QPSK 250kbps is supported so we use its max sensitivity.
             SetRxSensitivity(-106.58);
@@ -1182,7 +1182,7 @@ LrWpanPhy::PlmeSetAttributeRequest(LrWpanPibAttributeIdentifier id,
         {
             // Cancel a pending transceiver state change.
             // Switch off the transceiver.
-            // TODO: Is switching off the transceiver the right choice?
+            // TO9DO: Is switching off the transceiver the right choice?
             m_trxState = IEEE_802_15_4_PHY_TRX_OFF;
             if (m_trxStatePending != IEEE_802_15_4_PHY_IDLE)
             {
@@ -1424,7 +1424,7 @@ LrWpanPhy::EndCca()
             // packet reception starting with the first bit of the preamble.
             // Therefore, this code will never be reached, as PhyIsBusy() would
             // already lead to a channel busy condition.
-            // TODO: Change this, if we also model preamble and SFD detection.
+            // TO9DO: Change this, if we also model preamble and SFD detection.
             sensedChannelState = IEEE_802_15_4_PHY_BUSY;
         }
         else
@@ -1439,7 +1439,7 @@ LrWpanPhy::EndCca()
         {
             // Again, this code will never be reached, if we are already receiving
             // a packet, as PhyIsBusy() would already lead to a channel busy condition.
-            // TODO: Change this, if we also model preamble and SFD detection.
+            // TO9DO: Change this, if we also model preamble and SFD detection.
             sensedChannelState = IEEE_802_15_4_PHY_BUSY;
         }
         else
@@ -1602,7 +1602,7 @@ LrWpanPhy::SetPhyOption(LrWpanPhyOption phyOption)
 
     m_phyOption = IEEE_802_15_4_INVALID_PHY_OPTION;
 
-    // TODO: Only O-QPSK 2.4GHz is supported in the LrWpanSpectrumModel
+    // TO9DO: Only O-QPSK 2.4GHz is supported in the LrWpanSpectrumModel
     //       we must limit the page until support for other modulations is added to the spectrum
     //       model.
     NS_ABORT_MSG_UNLESS(phyOption == IEEE_802_15_4_2_4GHZ_OQPSK, " Only 2.4Ghz O-QPSK supported.");
@@ -1668,7 +1668,7 @@ LrWpanPhy::SetPhyOption(LrWpanPhyOption phyOption)
     NS_ASSERT(phyOption != IEEE_802_15_4_INVALID_PHY_OPTION);
 
     m_phyOption = phyOption;
-    // TODO: Fix/Update list when more modulations are supported.
+    // TO9DO: Fix/Update list when more modulations are supported.
     // IEEE 802.15.4-2006, Table 23
     // 5 MSB = Page number, 27 LSB = Supported Channels (1= supported, 0 Not supported)
     // Currently only page 0, channels 11-26 supported.
@@ -1685,7 +1685,7 @@ LrWpanPhy::SetPhyOption(LrWpanPhyOption phyOption)
     m_edPower.lastUpdate = Seconds(0.0);
     m_edPower.measurementLength = Seconds(0.0);
 
-    // TODO: Change the limits  Rx sensitivity when other modulations are supported
+    // TO9DO: Change the limits  Rx sensitivity when other modulations are supported
     // Currently, only O-QPSK 250kbps is supported and its maximum possible sensitivity is
     // equal to -106.58 dBm and its minimum sensitivity is defined as -85 dBm
     SetRxSensitivity(-106.58);
@@ -1727,7 +1727,7 @@ LrWpanPhy::SetRxSensitivity(double dbmSensitivity)
     // After Rx sensitivity is set, this becomes the new point where PER < 1 % for a
     // PSDU of 20 bytes as described by the standard.
 
-    // TODO: recalculate maxRxSensitivity (Noise factor = 1) when additional modulations are
+    // TO9DO: recalculate maxRxSensitivity (Noise factor = 1) when additional modulations are
     // supported.
     double maxRxSensitivityW = DbmToW(-106.58);
 
