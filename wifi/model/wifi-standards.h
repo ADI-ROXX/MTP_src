@@ -41,6 +41,7 @@ enum WifiStandard
     WIFI_STANDARD_80211b,
     WIFI_STANDARD_80211g,
     WIFI_STANDARD_80211p,
+    WIFI_STANDARD_80211p20,
     WIFI_STANDARD_80211n,
     WIFI_STANDARD_80211ac,
     WIFI_STANDARD_80211ad,
@@ -68,6 +69,8 @@ operator<<(std::ostream& os, WifiStandard standard)
         return (os << "802.11g");
     case WIFI_STANDARD_80211p:
         return (os << "802.11p");
+    case WIFI_STANDARD_80211p20:
+        return (os << "802.11p20");
     case WIFI_STANDARD_80211n:
         return (os << "802.11n");
     case WIFI_STANDARD_80211ac:
@@ -91,6 +94,7 @@ const std::map<WifiStandard, std::list<WifiPhyBand>> wifiStandards = {
     {WIFI_STANDARD_80211b, {WIFI_PHY_BAND_2_4GHZ}},
     {WIFI_STANDARD_80211g, {WIFI_PHY_BAND_2_4GHZ}},
     {WIFI_STANDARD_80211p, {WIFI_PHY_BAND_5GHZ}},
+    {WIFI_STANDARD_80211p20, {WIFI_PHY_BAND_5GHZ}},
     {WIFI_STANDARD_80211n, {WIFI_PHY_BAND_2_4GHZ, WIFI_PHY_BAND_5GHZ}},
     {WIFI_STANDARD_80211ac, {WIFI_PHY_BAND_5GHZ}},
     {WIFI_STANDARD_80211ad, {WIFI_PHY_BAND_60GHZ}},
@@ -106,7 +110,8 @@ enum FrequencyChannelType : uint8_t
 {
     WIFI_PHY_DSSS_CHANNEL = 0,
     WIFI_PHY_OFDM_CHANNEL,
-    WIFI_PHY_80211p_CHANNEL
+    WIFI_PHY_80211p_CHANNEL,
+    WIFI_PHY_80211p20_CHANNEL
 };
 
 /**
@@ -145,6 +150,8 @@ GetDefaultChannelWidth(WifiStandard standard, WifiPhyBand band)
         return 22;
     case WIFI_STANDARD_80211p:
         return 10;
+    case WIFI_STANDARD_80211p20:
+        return 20;
     case WIFI_STANDARD_80211ac:
         return 80;
     case WIFI_STANDARD_80211ad:
@@ -171,6 +178,7 @@ GetDefaultPhyBand(WifiStandard standard)
     case WIFI_STANDARD_80211p:
     case WIFI_STANDARD_80211a:
     case WIFI_STANDARD_80211ac:
+    case WIFI_STANDARD_80211p20:
     case WIFI_STANDARD_80211ax:
     case WIFI_STANDARD_80211be:
         return WIFI_PHY_BAND_5GHZ;

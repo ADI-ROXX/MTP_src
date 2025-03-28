@@ -123,7 +123,7 @@ class YansWifiPhyHelper : public WifiPhyHelper
      * Create a PHY helper.
      */
     YansWifiPhyHelper();
-
+    static YansWifiPhyHelper Default();
     /**
      * \param channel the channel to associate to this helper
      *

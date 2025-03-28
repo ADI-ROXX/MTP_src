@@ -53,8 +53,7 @@ const PhyEntity::ModulationLookupTable OfdmPhy::m_ofdmModulationLookupTable {
     { "OfdmRate9Mbps",          { WIFI_CODE_RATE_3_4, 2 } },  //  |
     { "OfdmRate12Mbps",         { WIFI_CODE_RATE_1_2, 4 } },  //  V
     { "OfdmRate18Mbps",         { WIFI_CODE_RATE_3_4, 4 } },
-    //  { "OfdmRate24Mbps",  { WIFI_CODE_RATE_3_4, 64 } }
-    { "OfdmRate27Mbps",         { WIFI_CODE_RATE_9_16, 16 } },                  //yahan par add kiya hai maine
+    { "OfdmRate24Mbps",         { WIFI_CODE_RATE_3_4, 64 } }, 
     { "OfdmRate36Mbps",         { WIFI_CODE_RATE_3_4, 16 } },
     { "OfdmRate48Mbps",         { WIFI_CODE_RATE_2_3, 64 } },
     { "OfdmRate54Mbps",         { WIFI_CODE_RATE_3_4, 64 } },
@@ -312,6 +311,7 @@ OfdmPhy::GetHeaderDuration(const WifiTxVector& txVector) const
     }
 }
 
+//TODO - Payload duration
 Time
 OfdmPhy::GetPayloadDuration(uint32_t size,
                             const WifiTxVector& txVector,

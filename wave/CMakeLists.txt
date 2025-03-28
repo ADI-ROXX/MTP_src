@@ -6,6 +6,7 @@ build_lib(
     helper/wave-helper.cc
     helper/wave-mac-helper.cc
     helper/wifi-80211p-helper.cc
+    helper/wifi-80211p20-helper.cc
     model/bsm-application.cc
     model/channel-coordinator.cc
     model/channel-manager.cc
@@ -23,6 +24,7 @@ build_lib(
     helper/wave-helper.h
     helper/wave-mac-helper.h
     helper/wifi-80211p-helper.h
+    helper/wifi-80211p20-helper.h
     model/bsm-application.h
     model/channel-coordinator.h
     model/channel-manager.h

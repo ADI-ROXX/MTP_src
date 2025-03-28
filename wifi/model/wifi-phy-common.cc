@@ -217,6 +217,9 @@ GetModulationClassForStandard(WifiStandard standard)
     case WIFI_STANDARD_80211p:
         modulationClass = WIFI_MOD_CLASS_OFDM;
         break;
+    case WIFI_STANDARD_80211p20:
+        modulationClass = WIFI_MOD_CLASS_OFDM;
+        break;
     case WIFI_STANDARD_80211b:
         modulationClass = WIFI_MOD_CLASS_DSSS;
         break;
@@ -261,7 +264,7 @@ GetMaximumChannelWidth(WifiModulationClass modulation)
     case WIFI_MOD_CLASS_HE:
         return 160;
     case WIFI_MOD_CLASS_EHT:
-        return 160; // TODO update when 320 MHz channels are supported
+        return 160; // TO9DO update when 320 MHz channels are supported
     default:
         NS_ABORT_MSG("Unknown modulation class: " << modulation);
         return 0;

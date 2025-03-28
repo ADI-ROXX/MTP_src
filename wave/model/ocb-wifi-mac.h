@@ -184,6 +184,7 @@ class OcbWifiMac : public WifiMac
 
     // Inherited from base class
     void ConfigureStandard(WifiStandard standard) override;
+    void ConfigureStandard(WifiStandard standard, uint32_t& cwmax_);
 
   protected:
     void DoDispose() override;

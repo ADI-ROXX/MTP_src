@@ -45,7 +45,7 @@ YansWifiChannelHelper::Default()
 {
     YansWifiChannelHelper helper;
     helper.SetPropagationDelay("ns3::ConstantSpeedPropagationDelayModel");
-    helper.AddPropagationLoss("ns3::LogDistancePropagationLossModel");
+    helper.AddPropagationLoss("ns3::FriisPropagationLossModel");
     return helper;
 }
 

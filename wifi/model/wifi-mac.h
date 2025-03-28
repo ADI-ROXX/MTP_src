@@ -419,6 +419,8 @@ class WifiMac : public Object
      * This method can only be called after a configured PHY has been set.
      */
     virtual void ConfigureStandard(WifiStandard standard);
+    virtual void ConfigureStandard(WifiStandard standard, uint32_t& cwmax_);
+
 
     /**
      * \return pointer to HtConfiguration if it exists

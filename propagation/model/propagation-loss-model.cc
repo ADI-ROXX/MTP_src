@@ -230,6 +230,7 @@ FriisPropagationLossModel::DbmFromW(double w) const
     return dbm;
 }
 
+// TODO Yahan par Receiving power calculation hai
 double
 FriisPropagationLossModel::DoCalcRxPower(double txPowerDbm,
                                          Ptr<MobilityModel> a,
@@ -264,6 +265,7 @@ FriisPropagationLossModel::DoCalcRxPower(double txPowerDbm,
      * L: system loss (unit-less)
      * lambda: wavelength (m)
      */
+    txPowerDbm=18.6633278894275864725;
     double distance = a->GetDistanceFrom(b);
     if (distance < 3 * m_lambda)
     {

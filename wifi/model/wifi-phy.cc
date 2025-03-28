@@ -888,6 +888,26 @@ WifiPhy::Configure80211p()
 }
 
 void
+WifiPhy::Configure80211p20()
+{
+    NS_LOG_FUNCTION(this);
+    if (GetChannelWidth() == 20)
+    {
+        AddPhyEntity(WIFI_MOD_CLASS_OFDM, Create<OfdmPhy>(OFDM_PHY_DEFAULT));
+
+        // See Table 17-21 "OFDM PHY characteristics" of 802.11-2016
+        SetSifs(MicroSeconds(32));
+        SetSlot(MicroSeconds(13));
+        SetPifs(GetSifs() + GetSlot());
+        m_ackTxTime = MicroSeconds(88);
+    }
+    else
+    {
+        NS_FATAL_ERROR("802.11p20 configured with a wrong channel width!");
+    }
+}
+
+void
 WifiPhy::Configure80211n()
 {
     NS_LOG_FUNCTION(this);
@@ -972,6 +992,9 @@ WifiPhy::ConfigureStandard(WifiStandard standard)
         break;
     case WIFI_STANDARD_80211p:
         Configure80211p();
+        break;
+    case WIFI_STANDARD_80211p20:
+        Configure80211p20();
         break;
     case WIFI_STANDARD_80211n:
         Configure80211n();
@@ -1476,6 +1499,7 @@ WifiPhy::CalculatePhyPreambleAndHeaderDuration(const WifiTxVector& txVector)
         ->CalculatePhyPreambleAndHeaderDuration(txVector);
 }
 
+// TODO Tx Duration
 Time
 WifiPhy::CalculateTxDuration(uint32_t size,
                              const WifiTxVector& txVector,
@@ -1745,6 +1769,7 @@ WifiPhy::Send(WifiConstPsduMap psdus, const WifiTxVector& txVector)
     m_currentPreambleEvents.clear();
     m_endPhyRxEvent.Cancel();
 
+    // FIXME Sending without restriction might be an issue 
     if (m_powerRestricted)
     {
         NS_LOG_DEBUG("Transmitting with power restriction for " << txDuration.As(Time::NS));
@@ -1783,7 +1808,7 @@ WifiPhy::Send(WifiConstPsduMap psdus, const WifiTxVector& txVector)
     }
 
     m_endTxEvent =
-        Simulator::Schedule(txDuration, &WifiPhy::NotifyTxEnd, this, psdus); // TODO: fix for MU
+        Simulator::Schedule(txDuration, &WifiPhy::NotifyTxEnd, this, psdus); // TO9DO: fix for MU
 
     StartTx(ppdu);
     ppdu->ResetTxVector();
@@ -1827,7 +1852,7 @@ WifiPhy::StartReceivePreamble(Ptr<const WifiPpdu> ppdu,
     }
     else
     {
-        // TODO find a fallback PHY for receiving the PPDU (e.g. 11a for 11ax due to preamble
+        // TO9DO find a fallback PHY for receiving the PPDU (e.g. 11a for 11ax due to preamble
         // structure)
         NS_LOG_DEBUG("Unsupported modulation received (" << modulation << "), consider as noise");
         m_interference->Add(ppdu, ppdu->GetTxVector(), rxDuration, rxPowersW);
@@ -2167,7 +2192,7 @@ WifiPhy::GetTxPowerForTransmission(Ptr<const WifiPpdu> ppdu) const
 Ptr<const WifiPsdu>
 WifiPhy::GetAddressedPsduInPpdu(Ptr<const WifiPpdu> ppdu) const
 {
-    // TODO: wrapper. See if still needed
+    // TO9DO: wrapper. See if still needed
     return GetPhyEntityForPpdu(ppdu)->GetAddressedPsduInPpdu(ppdu);
 }
 

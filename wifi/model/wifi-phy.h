@@ -1266,6 +1266,11 @@ class WifiPhy : public Object
     void Configure80211p();
     /**
      * Configure WifiPhy with appropriate channel frequency and
+     * supported rates for 802.11p20 standard.
+     */
+    void Configure80211p20();
+    /**
+     * Configure WifiPhy with appropriate channel frequency and
      * supported rates for 802.11n standard.
      */
     void Configure80211n();

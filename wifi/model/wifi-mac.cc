@@ -677,15 +677,15 @@ WifiMac::ConfigureDcf(Ptr<Txop> dcf,
         cwMinValue = cwmin;
         cwMaxValue = cwmax;
         aifsnValue = 3;
-        txopLimitDsss = MicroSeconds(0);   // TODO should be MicroSeconds (3264)
-        txopLimitNoDsss = MicroSeconds(0); // TODO should be MicroSeconds (2528)
+        txopLimitDsss = MicroSeconds(0);   // TO9DO should be MicroSeconds (3264)
+        txopLimitNoDsss = MicroSeconds(0); // TO9DO should be MicroSeconds (2528)
         break;
     case AC_BK:
         cwMinValue = cwmin;
         cwMaxValue = cwmax;
         aifsnValue = 7;
-        txopLimitDsss = MicroSeconds(0);   // TODO should be MicroSeconds (3264)
-        txopLimitNoDsss = MicroSeconds(0); // TODO should be MicroSeconds (2528)
+        txopLimitDsss = MicroSeconds(0);   // TO9DO should be MicroSeconds (3264)
+        txopLimitNoDsss = MicroSeconds(0); // TO9DO should be MicroSeconds (2528)
         break;
     case AC_BE_NQOS:
         cwMinValue = cwmin;
@@ -766,6 +766,54 @@ WifiMac::ConfigureStandard(WifiStandard standard)
         ConfigurePhyDependentParameters(link->id);
     }
 }
+
+void
+WifiMac::ConfigureStandard(WifiStandard standard, uint32_t& cwmax_)
+{
+    NS_LOG_FUNCTION(this << standard);
+    NS_ABORT_IF(standard >= WIFI_STANDARD_80211n && !m_qosSupported);
+    NS_ABORT_MSG_IF(m_links.empty(), "No PHY configured yet");
+
+    for (auto& link : m_links)
+    {
+        NS_ABORT_MSG_IF(
+            !link->phy || !link->phy->GetOperatingChannel().IsSet(),
+            "[LinkID " << link->id
+                       << "] PHY must have been set and an operating channel must have been set");
+
+        // do not create a ChannelAccessManager and a FrameExchangeManager if they
+        // already exist (this function may be called after ResetWifiPhys)
+        if (!link->channelAccessManager)
+        {
+            link->channelAccessManager = CreateObject<ChannelAccessManager>();
+        }
+        link->channelAccessManager->SetupPhyListener(link->phy);
+
+        if (!link->feManager)
+        {
+            link->feManager = SetupFrameExchangeManager(standard);
+        }
+        link->feManager->SetWifiPhy(link->phy);
+        link->feManager->SetWifiMac(this);
+        link->feManager->SetLinkId(link->id);
+        link->channelAccessManager->SetLinkId(link->id);
+        link->channelAccessManager->SetupFrameExchangeManager(link->feManager);
+
+        if (m_txop)
+        {
+            m_txop->SetWifiMac(this);
+            link->channelAccessManager->Add(m_txop);
+        }
+        for (auto it = m_edca.begin(); it != m_edca.end(); ++it)
+        {
+            it->second->SetWifiMac(this);
+            link->channelAccessManager->Add(it->second);
+        }
+
+        ConfigurePhyDependentParameters(link->id);
+    }
+}
+
 
 void
 WifiMac::ConfigurePhyDependentParameters(uint8_t linkId)
@@ -1525,7 +1573,7 @@ WifiMac::GetExtendedCapabilities() const
     ExtendedCapabilities capabilities;
     capabilities.SetHtSupported(GetHtSupported());
     capabilities.SetVhtSupported(GetVhtSupported(SINGLE_LINK_OP_ID));
-    // TODO: to be completed
+    // TO9DO: to be completed
     return capabilities;
 }
 

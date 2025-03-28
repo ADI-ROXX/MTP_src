@@ -531,7 +531,7 @@ WifiPhyHelper::GetRadiotapHeader(RadiotapHeader& header,
 
     if (preamble == WIFI_PREAMBLE_HE_MU)
     {
-        // TODO: fill in fields (everything is set to 0 so far)
+        // TO9DO: fill in fields (everything is set to 0 so far)
         std::array<uint8_t, 4> ruChannel1;
         std::array<uint8_t, 4> ruChannel2;
         header.SetHeMuFields(0, 0, ruChannel1, ruChannel2);
@@ -858,9 +858,120 @@ WifiHelper::Install(const WifiPhyHelper& phyHelper,
 NetDeviceContainer
 WifiHelper::Install(const WifiPhyHelper& phyHelper,
                     const WifiMacHelper& macHelper,
+                    NodeContainer::Iterator first,
+                    NodeContainer::Iterator last,
+                uint32_t& cwmax_) const
+{
+    NetDeviceContainer devices;
+    for (NodeContainer::Iterator i = first; i != last; ++i)
+    {
+        Ptr<Node> node = *i;
+        Ptr<WifiNetDevice> device = CreateObject<WifiNetDevice>();
+        node->AddDevice(device);
+        device->SetStandard(m_standard);
+        if (m_standard == WIFI_STANDARD_UNSPECIFIED)
+        {
+            NS_FATAL_ERROR("No standard specified!");
+            return devices;
+        }
+        if (m_standard >= WIFI_STANDARD_80211n)
+        {
+            auto htConfiguration = m_htConfig.Create<HtConfiguration>();
+            device->SetHtConfiguration(htConfiguration);
+        }
+        if (m_standard >= WIFI_STANDARD_80211ac)
+        {
+            // Create the VHT Configuration object even if the PHY band is 2.4GHz
+            // (WifiNetDevice::GetVhtConfiguration() checks the PHY band being used).
+            // This approach allows us not to worry about deleting this object when
+            // the PHY band is switched from 5GHz to 2.4GHz and creating this object
+            // when the PHY band is switched from 2.4GHz to 5GHz.
+            auto vhtConfiguration = m_vhtConfig.Create<VhtConfiguration>();
+            device->SetVhtConfiguration(vhtConfiguration);
+        }
+        if (m_standard >= WIFI_STANDARD_80211ax)
+        {
+            auto heConfiguration = m_heConfig.Create<HeConfiguration>();
+            device->SetHeConfiguration(heConfiguration);
+        }
+        if (m_standard >= WIFI_STANDARD_80211be)
+        {
+            auto ehtConfiguration = m_ehtConfig.Create<EhtConfiguration>();
+            device->SetEhtConfiguration(ehtConfiguration);
+        }
+        std::vector<Ptr<WifiRemoteStationManager>> managers;
+        std::vector<Ptr<WifiPhy>> phys = phyHelper.Create(node, device);
+        device->SetPhys(phys);
+        // if only one remote station manager model was provided, replicate it for all the links
+        auto stationManagers = m_stationManager;
+        if (stationManagers.size() == 1 && phys.size() > 1)
+        {
+            stationManagers.resize(phys.size(), stationManagers[0]);
+        }
+        NS_ABORT_MSG_IF(stationManagers.size() != phys.size(),
+                        "Number of station manager models ("
+                            << stationManagers.size() << ") does not match the number of links ("
+                            << phys.size() << ")");
+        for (std::size_t i = 0; i < phys.size(); i++)
+        {
+            phys[i]->ConfigureStandard(m_standard);
+            managers.push_back(stationManagers[i].Create<WifiRemoteStationManager>());
+        }
+        device->SetRemoteStationManagers(managers);
+        Ptr<WifiMac> mac = macHelper.Create(device, m_standard, cwmax_);
+        if ((m_standard >= WIFI_STANDARD_80211ax) && (m_obssPdAlgorithm.IsTypeIdSet()))
+        {
+            Ptr<ObssPdAlgorithm> obssPdAlgorithm = m_obssPdAlgorithm.Create<ObssPdAlgorithm>();
+            device->AggregateObject(obssPdAlgorithm);
+            obssPdAlgorithm->ConnectWifiNetDevice(device);
+        }
+        devices.Add(device);
+        NS_LOG_DEBUG("node=" << node << ", mob=" << node->GetObject<MobilityModel>());
+        if (m_enableFlowControl)
+        {
+            Ptr<NetDeviceQueueInterface> ndqi;
+            BooleanValue qosSupported;
+            Ptr<WifiMacQueue> wmq;
+
+            mac->GetAttributeFailSafe("QosSupported", qosSupported);
+            if (qosSupported.Get())
+            {
+                ndqi = CreateObjectWithAttributes<NetDeviceQueueInterface>("NTxQueues",
+                                                                           UintegerValue(4));
+                for (auto& ac : {AC_BE, AC_BK, AC_VI, AC_VO})
+                {
+                    Ptr<QosTxop> qosTxop = mac->GetQosTxop(ac);
+                    wmq = qosTxop->GetWifiMacQueue();
+                    ndqi->GetTxQueue(static_cast<std::size_t>(ac))->ConnectQueueTraces(wmq);
+                }
+                ndqi->SetSelectQueueCallback(m_selectQueueCallback);
+            }
+            else
+            {
+                ndqi = CreateObject<NetDeviceQueueInterface>();
+
+                wmq = mac->GetTxop()->GetWifiMacQueue();
+                ndqi->GetTxQueue(0)->ConnectQueueTraces(wmq);
+            }
+            device->AggregateObject(ndqi);
+        }
+    }
+    return devices;
+}
+
+NetDeviceContainer
+WifiHelper::Install(const WifiPhyHelper& phyHelper,
+                    const WifiMacHelper& macHelper,
                     NodeContainer c) const
 {
     return Install(phyHelper, macHelper, c.Begin(), c.End());
+}
+NetDeviceContainer
+WifiHelper::Install(const WifiPhyHelper& phyHelper,
+                    const WifiMacHelper& macHelper,
+                    NodeContainer c, uint32_t& cwmax_) const
+{
+    return Install(phyHelper, macHelper, c.Begin(), c.End(), cwmax_);
 }
 
 NetDeviceContainer

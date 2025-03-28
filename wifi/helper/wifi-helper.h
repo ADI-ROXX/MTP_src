@@ -403,6 +403,12 @@ class WifiHelper
                                        const WifiMacHelper& mac,
                                        NodeContainer::Iterator first,
                                        NodeContainer::Iterator last) const;
+
+    NetDeviceContainer Install(const WifiPhyHelper& phyHelper,
+                        const WifiMacHelper& macHelper,
+                        NodeContainer::Iterator first,
+                        NodeContainer::Iterator last,
+                    uint32_t& cwmax_) const;
     /**
      * \param phy the PHY helper to create PHY objects
      * \param mac the MAC helper to create MAC objects
@@ -412,6 +418,9 @@ class WifiHelper
     virtual NetDeviceContainer Install(const WifiPhyHelper& phy,
                                        const WifiMacHelper& mac,
                                        NodeContainer c) const;
+    virtual NetDeviceContainer Install(const WifiPhyHelper& phy,
+                                       const WifiMacHelper& mac,
+                                       NodeContainer c, uint32_t& cwmax_) const;
     /**
      * \param phy the PHY helper to create PHY objects
      * \param mac the MAC helper to create MAC objects
