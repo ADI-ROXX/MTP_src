@@ -70,7 +70,7 @@ const uint16_t WIFI_CODE_RATE_13_21 = 9;     //!< 13/21 coding rate
 const uint16_t WIFI_CODE_RATE_52_63 = 10;    //!< 52/63 coding rate
 const uint16_t WIFI_CODE_RATE_13_14 = 11;    //!< 13/14 coding rate
 const uint16_t WIFI_CODE_RATE_7_8 = 12;      //!< 7/8 coding rate
-// const uint16_t WIFI_CODE_RATE_9_16 = 13;    //yahan
+const uint16_t WIFI_CODE_RATE_9_16 = 13;    //yahan
 
 /**
  * \ingroup wifi
